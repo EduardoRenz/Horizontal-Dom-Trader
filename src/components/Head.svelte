@@ -4,6 +4,8 @@
 
 <style>
     header {
+        position: fixed;
+        width: 100%;
         box-shadow: var(--shadow);
         padding: 12px;
         grid-area: header;
