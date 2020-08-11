@@ -2,7 +2,9 @@
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import type  { Marker } from './IMarker'
+    export let price : number
     export let markers : Marker[] = null
+    export let isLimit : boolean = false
 
 
 </script>
@@ -28,9 +30,31 @@
     border-style: solid;
     border-left: none;
   }
+  .limit {
+    border-width: 4px;
+    border-image: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgba(255, 230, 0, 0.5),
+        rgba(255, 255, 255, 0)
+      )
+      1 100%;
+  }
+  header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 87px;
+    min-height: 87px;
+  }
 </style>
 
-<div class="price-area">
+<article class="price-area" class:limit={isLimit}>
+  <header>
     <Note />
     <PriceMarker markers={markers}/>
-</div>
+  </header>
+
+
+
+</article>

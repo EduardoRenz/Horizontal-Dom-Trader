@@ -35,23 +35,23 @@
 
 <Head />
 <main id="main">
-  <PriceArea />
-  <PriceArea markers={[{name:'Ajuste Ant.', color:'rgba(168, 168, 168, 0.5)'},{name:'VWAP', color:'rgba(0, 209, 255, 0.5)'}]} />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea markers={[{name:'Abertura', color:'rgba(171, 200, 255, 0.5)'}]} />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea />
-  <PriceArea markers={[{name:'Ajuste Ant.', color:'rgba(50, 41, 179, 0.5)'}]} />
-  <PriceArea />
+  <PriceArea price={5380.5} isLimit={true} />
+  <PriceArea price={5381.0} markers={[{name:'Ajuste Ant.', color:'rgba(168, 168, 168, 0.5)'},{name:'VWAP', color:'rgba(0, 209, 255, 0.5)'}]} />
+  <PriceArea price={5381.5} />
+  <PriceArea price={5382.0} />
+  <PriceArea price={5382.5} />
+  <PriceArea price={5383.0} />
+  <PriceArea price={5383.5} />
+  <PriceArea price={5384.0} markers={[{name:'Abertura', color:'rgba(171, 200, 255, 0.5)'}]} />
+  <PriceArea price={5384.5} />
+  <PriceArea price={5385.0} />
+  <PriceArea price={5385.5} />
+  <PriceArea price={5386.0} />
+  <PriceArea price={5386.5} />
+  <PriceArea price={5387.0} />
+  <PriceArea price={5387.5} />
+  <PriceArea price={5388.0} />
+  <PriceArea price={5388.5} markers={[{name:'Ajuste Ant.', color:'rgba(50, 41, 179, 0.5)'}]} />
+  <PriceArea price={5389.0} />
 </main>
 <Footer />
