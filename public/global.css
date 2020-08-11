@@ -3,15 +3,27 @@
 	--shadow:0px 4px 4px rgba(0, 0, 0, 0.25);
 	--margin:2px;
 	--padding:2px;
+	--opacity:0.4;
+
+	--abertura:rgba(171, 200, 255, 0.5);
 }
 
-*,html, body{
+*,html, body, button{
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
 	color: white;
 	font-family:  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	  scrollbar-width: thin;
+	  background: none;
+	  border:none;
+	
 }
+button {
+	cursor: pointer;
+}
+
+  
 html, body {
 	position: relative;
 	background:var(--background);
@@ -27,8 +39,8 @@ body {
 }
 
 h2 {
-	text-align: center;
-	font-size: 26px;
+	text-align: left;
+	font-size: 24;
 	font-weight: normal;
 	line-height: 30px;
 }

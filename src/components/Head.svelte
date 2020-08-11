@@ -4,10 +4,9 @@
 
 <style>
     header {
-        position: fixed;
-        width: 100%;
         box-shadow: var(--shadow);
         padding: 12px;
+        height: 100%;
         grid-area: header;
     }
 </style>
