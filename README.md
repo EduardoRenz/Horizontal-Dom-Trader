@@ -3,4 +3,4 @@
 
 A platform for Day Trade based on order flow made with Svelte
 
-![Preview]("public/Desktop - 1main.png")
+![Preview](public/preview.png)
