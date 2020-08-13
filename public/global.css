@@ -5,6 +5,9 @@
 	--padding:2px;
 	--opacity:0.4;
 
+	--sell-light:rgba(255, 0, 0, 0.2);
+	--buy-light:rgba(126, 255, 0, 0.2);
+
 	--abertura:rgba(171, 200, 255, 0.5);
 }
 

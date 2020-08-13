@@ -1,3 +1,4 @@
+<!-- Represents the user annotations on each price -->
 <script>
     import Icon from '@iconify/svelte';
     import editFilled from '@iconify/icons-ant-design/edit-filled';

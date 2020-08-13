@@ -1,12 +1,12 @@
+<!-- Represents the whole price column -->
 <script type="ts">
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
+    import PriceLine from './PriceLine.svelte'
     import type  { Marker } from './IMarker'
     export let price : number
     export let markers : Marker[] = null
     export let isLimit : boolean = false
-
-
 </script>
 
 <style>
@@ -47,14 +47,21 @@
     max-height: 87px;
     min-height: 87px;
   }
+
+  section  {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 </style>
 
 <article class="price-area" class:limit={isLimit}>
   <header>
     <Note />
-    <PriceMarker markers={markers}/>
+    <PriceMarker {markers} />
   </header>
-
-
+  <section >
+    <PriceLine {price} />
+  </section>
 
 </article>
