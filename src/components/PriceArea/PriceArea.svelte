@@ -3,6 +3,7 @@
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
+    import Offers from './Offers/Offers.svelte'
     import type  { Marker } from './IMarker'
     export let price : number
     export let markers : Marker[] = null
@@ -31,7 +32,7 @@
     border-left: none;
   }
   .limit {
-    border-width: 4px;
+    border-width:0 4px;
     border-image: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0),
@@ -48,20 +49,22 @@
     min-height: 87px;
   }
 
-  section  {
+  article  {
     width: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%;
+
   }
 </style>
 
-<article class="price-area" class:limit={isLimit}>
+<div class="price-area" class:limit={isLimit}>
   <header>
     <Note />
     <PriceMarker {markers} />
   </header>
-  <section >
+  <article >
+    <Offers />
     <PriceLine {price} />
-  </section>
-
-</article>
+  </article>
+</div>

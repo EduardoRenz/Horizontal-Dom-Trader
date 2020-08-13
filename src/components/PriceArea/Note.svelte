@@ -6,7 +6,6 @@
 <button class="edit-icon">
     <Icon  icon={editFilled} width="24px" />
 </button>
-
 <style>
     .edit-icon{
         opacity: var(--opacity);

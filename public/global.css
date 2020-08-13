@@ -4,6 +4,7 @@
 	--margin:2px;
 	--padding:2px;
 	--opacity:0.4;
+	--border:#A5A5A5;
 
 	--sell-light:rgba(255, 0, 0, 0.2);
 	--buy-light:rgba(126, 255, 0, 0.2);
@@ -17,9 +18,9 @@
 	box-sizing: border-box;
 	color: white;
 	font-family:  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-	  scrollbar-width: thin;
-	  background: none;
-	  border:none;
+	scrollbar-width: thin;
+	background: none;
+	border:none;
 	
 }
 button {
@@ -38,7 +39,7 @@ body {
 	grid-template-areas: 'header'
 						 'main'
 						 'footer';
-						 grid-template-rows: 53px 1fr 102px;
+	grid-template-rows: 53px 1fr 102px;
 }
 
 h2 {
