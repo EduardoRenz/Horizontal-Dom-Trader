@@ -1,5 +1,8 @@
-<script>
+<script type="ts">
     import Offer from './Offer.svelte'
+    import type IOffer from "./IOffer"
+    export let offers : IOffer[]
+    
 </script>
 <style>
     .offers {
@@ -9,7 +12,11 @@
         height: 324px;
     }
 </style>
-
 <div class="offers">
-    <Offer/>
+    {#if offers}
+    {#each offers as offer}
+        <Offer {offer} />
+    {/each}
+    {/if}
+
 </div>

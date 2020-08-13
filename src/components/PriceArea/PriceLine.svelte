@@ -35,5 +35,5 @@
     }
 </style>
 <div class="price {setPriceColor()}" >
-    {price}
+    {price.toFixed(1)}
 </div>

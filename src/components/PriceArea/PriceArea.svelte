@@ -4,10 +4,16 @@
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
     import Offers from './Offers/Offers.svelte'
-    import type  { Marker } from './IMarker'
+    import type  { IMarker } from './IMarker'
+    import type IOffer from "./Offers/IOffer"
     export let price : number
-    export let markers : Marker[] = null
+    export let markers : IMarker[] = null
     export let isLimit : boolean = false
+
+    import { offers } from '../../store.js'
+
+    const price_offers: IOffer[]  = $offers[price] 
+
 </script>
 
 <style>
@@ -64,7 +70,10 @@
     <PriceMarker {markers} />
   </header>
   <article >
-    <Offers />
+    <Offers offers={price_offers} />
     <PriceLine {price} />
   </article>
+ 
+
+
 </div>

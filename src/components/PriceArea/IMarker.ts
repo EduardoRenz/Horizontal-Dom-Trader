@@ -1,5 +1,5 @@
 
-export  interface Marker {
+export  interface IMarker {
   name:string
   color:string
 }

@@ -9,6 +9,8 @@
 	--sell-light:rgba(255, 0, 0, 0.2);
 	--buy-light:rgba(126, 255, 0, 0.2);
 
+	--player-institucional-br:#FF8A00;
+
 	--abertura:rgba(171, 200, 255, 0.5);
 }
 
@@ -47,6 +49,14 @@ h2 {
 	font-size: 24;
 	font-weight: normal;
 	line-height: 30px;
+}
+
+.chip {
+	font-size: 10px;
+	min-width: 28px;
+	background: rgba(255, 255, 255, 0.46);
+	border-radius: 4px;
+	text-align: center;
 }
 
 

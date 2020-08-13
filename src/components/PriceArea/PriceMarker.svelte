@@ -1,7 +1,7 @@
 <!-- Represents a meaning or information on this price (eg Open, Close, VWAP etc )  -->
 <script type="ts" >
-    import type  { Marker } from './IMarker'
-    export let markers  : Marker[]
+    import type  { IMarker } from './IMarker'
+    export let markers  : IMarker[]
 </script>
 {#if markers}
     {#each markers as marker}
