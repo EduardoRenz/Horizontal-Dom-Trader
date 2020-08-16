@@ -1,6 +1,6 @@
 
 export default  interface IOffer {
-    id:Number
+    player_id:Number
     lots:Number
   }
   

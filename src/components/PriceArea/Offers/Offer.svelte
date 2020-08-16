@@ -2,8 +2,8 @@
     import Icon from '@iconify/svelte';
     import icebergIcon from '@iconify/icons-openmoji/iceberg';
     import type IOffer from "./IOffer"
-    export let offer
-
+    import { corretoras } from "../../../store"
+    export let offer : IOffer
 </script>
 <style>
     .player {
@@ -28,11 +28,11 @@
 </style>
 
 <div class="player"> 
-    <span class="chip">4</span>
+    <span class="chip">{offer.lots}</span>
     <small>
-        {offer.player_id}
-        Bradesco
+        {corretoras[offer.player_id].name}
     </small>
+
     <Icon icon={icebergIcon} height="18px" style="margin-top:-3px" />
 </div>
 

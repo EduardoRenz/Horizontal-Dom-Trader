@@ -1,4 +1,7 @@
-import { writable ,derived,readable } from 'svelte/store';
+import { writable } from 'svelte/store';
+
+
+
 
 export const lastPrice = writable(5384.5);
 export const offers = writable({
@@ -6,3 +9,8 @@ export const offers = writable({
     5384.0: [{player_id:1,lots:10}],
 })
 
+export const corretoras = {
+    1: {"name":"Bradesco", "group":"player-institucional-br" },
+    2: {"name":"Teste", "group":"player-institucional-br" }
+}
+  corretoras

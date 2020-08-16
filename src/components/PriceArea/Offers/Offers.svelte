@@ -14,9 +14,9 @@
 </style>
 <div class="offers">
     {#if offers}
-    {#each offers as offer}
-        <Offer {offer} />
-    {/each}
+        {#each offers as offer}
+            <Offer {offer} />
+        {/each}
     {/if}
 
 </div>
