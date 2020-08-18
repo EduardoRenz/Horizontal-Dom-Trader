@@ -4,7 +4,7 @@
 	--margin:2px;
 	--padding:2px;
 	--opacity:0.4;
-	--column-size: 117px;
+	--player-size: 116px;
 	--border:#A5A5A5;
 
 	--buy:rgba(126, 255, 0, 0.5);
@@ -15,6 +15,7 @@
 
 	--player-institucional-br:#FF8A00;
 	--player-estrangeiro:#122EB3;
+	--player-hft:#474747;
 
 	--abertura:rgba(171, 200, 255, 0.5);
 }

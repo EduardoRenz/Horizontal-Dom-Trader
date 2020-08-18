@@ -8,6 +8,7 @@
     import type  { IMarker } from './IMarker'
     import type IOffer from "./Offers/IOffer"
     import type IAgression from "./Agressions/IAgression"
+
     export let price : number
     export let markers : IMarker[] = null
     export let isLimit : boolean = false
@@ -15,7 +16,7 @@
     import { offers,agressions } from '../../store.js'
 
     const price_offers: IOffer[]  = $offers[price] 
-    const price_agressions: IAgression[]  = $agressions[price] 
+    const price_agressions: IAgression[]  = $agressions.filter(agression=>agression.price === price)
 
 </script>
 
@@ -36,9 +37,10 @@
         rgba(255, 255, 255, 0)
       )
       1 100%;
-    border-width: 1px;
-    border-style: solid;
-    border-left: none;
+      border-width: 1px;
+      border-style: solid;
+      border-left: none; 
+
   }
   .limit {
     border-width:0 4px;

@@ -31,6 +31,12 @@
     grid-template-rows: 53px 1fr 102px;
     grid-area: main;
     display: flex;
+
+    /*
+      Grid on background
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 2px);
+    background-attachment: local;
+    background-size:var(--column-size) ; */
   }
 </style>
 

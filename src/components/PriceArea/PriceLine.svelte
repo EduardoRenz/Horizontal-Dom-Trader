@@ -3,10 +3,9 @@
     export let price : Number
 
     const setPriceColor = () => {
-        if($lastPrice === price){
+        if($lastPrice === price)
             return ""
-        }
-        return $lastPrice < price ? "buy-area" : "sell-area"
+        return $lastPrice === price || $lastPrice < price ? "buy-area" : "sell-area"
     }
 </script>
 <style>
