@@ -6,10 +6,14 @@
 	--opacity:0.4;
 	--border:#A5A5A5;
 
+	--buy:rgba(126, 255, 0, 0.5);
+	--sell:rgba(255, 0, 0, 0.6);
+
 	--sell-light:rgba(255, 0, 0, 0.2);
 	--buy-light:rgba(126, 255, 0, 0.2);
 
 	--player-institucional-br:#FF8A00;
+	--player-estrangeiro:#122EB3;
 
 	--abertura:rgba(171, 200, 255, 0.5);
 }
@@ -59,4 +63,9 @@ h2 {
 	text-align: center;
 }
 
-
+.player-institucional-br {
+	background-color: var(--player-institucional-br);
+  }
+  .player-estrangeiro {
+	background-color: var(--player-estrangeiro);
+  }

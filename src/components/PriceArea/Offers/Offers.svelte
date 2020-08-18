@@ -8,7 +8,7 @@
     .offers {
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: flex-end;
         height: 324px;
     }
 </style>

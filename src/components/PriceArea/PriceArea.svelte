@@ -4,15 +4,18 @@
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
     import Offers from './Offers/Offers.svelte'
+    import Agressions from './Agressions/Agressions.svelte'
     import type  { IMarker } from './IMarker'
     import type IOffer from "./Offers/IOffer"
+    import type IAgression from "./Agressions/IAgression"
     export let price : number
     export let markers : IMarker[] = null
     export let isLimit : boolean = false
 
-    import { offers } from '../../store.js'
+    import { offers,agressions } from '../../store.js'
 
     const price_offers: IOffer[]  = $offers[price] 
+    const price_agressions: IAgression[]  = $agressions[price] 
 
 </script>
 
@@ -72,6 +75,7 @@
   <article >
     <Offers offers={price_offers} />
     <PriceLine {price} />
+    <Agressions agressions={price_agressions}/>
   </article>
  
 

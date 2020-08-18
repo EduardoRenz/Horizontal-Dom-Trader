@@ -14,6 +14,7 @@
     Scroll the Main frame horizontaly
   */
   const scrollHorizontal = (e) =>{
+    e.preventDefault()
     main.scrollBy(e.deltaY*20,e.deltaY*20);
   }
 
@@ -21,7 +22,7 @@
 
 <style>
   main {
-	overflow-x: scroll;
+	  overflow-x: scroll;
     display: grid;
     grid-template-areas:
       "header"
