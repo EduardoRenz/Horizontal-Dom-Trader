@@ -1,5 +1,6 @@
 <!-- Represents the whole price column -->
 <script type="ts">
+    import { offers,agressions,lastPrice } from '../../store.js'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -13,14 +14,40 @@
     export let markers : IMarker[] = null
     export let isLimit : boolean = false
 
-    import { offers,agressions } from '../../store.js'
-
     const price_offers: IOffer[]  = $offers[price] 
     const price_agressions: IAgression[]  = $agressions.filter(agression=>agression.price === price)
+
+    let price_total = price_offers?.map( offer => offer.lots  ).reduce((acc,agg)=>{ return acc + agg },0) || 0
+
+
+    const getPriceSumColor = () =>{
+      if(price_total=== 0)
+        return "text-light"
+      if($lastPrice>price)
+        return "text-sell"
+      if($lastPrice<price)
+        return "text-buy"
+    }
 
 </script>
 
 <style>
+
+  header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-height: 87px;
+    min-height: 87px;
+  }
+
+  article  {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+  }
   .price-area {
     display: flex;
     flex-direction: column;
@@ -52,20 +79,18 @@
       )
       1 100%;
   }
-  header {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: 87px;
-    min-height: 87px;
+  .price-sum{
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 4px 0;
+    margin-bottom: var(--margin);
+    font-weight: bold;
+    font-size: 16px;
   }
-
-  article  {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
+  .text-light {
+    font-weight: normal;
+    opacity: 0.3;
+    color: var(--light-gray);
   }
 </style>
 
@@ -77,6 +102,9 @@
   <article >
     <Offers offers={price_offers} />
     <PriceLine {price} />
+    <span class={`price-sum ${getPriceSumColor()} `} >
+      {price_total}
+    </span>
     <Agressions agressions={price_agressions}/>
   </article>
  

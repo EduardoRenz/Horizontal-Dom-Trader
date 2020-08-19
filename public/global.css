@@ -5,13 +5,15 @@
 	--padding:2px;
 	--opacity:0.4;
 	--player-size: 116px;
-	--border:#A5A5A5;
 
+	--border:#A5A5A5;
 	--buy:rgba(126, 255, 0, 0.5);
 	--sell:rgba(255, 0, 0, 0.6);
-
+	--text-sell:#FFB5B5;
+	--text-buy:#8CFF82;
 	--sell-light:rgba(255, 0, 0, 0.2);
 	--buy-light:rgba(126, 255, 0, 0.2);
+	--light-gray:rgba(255, 255, 255, 0.46);
 
 	--player-institucional-br:#FF8A00;
 	--player-estrangeiro:#122EB3;
@@ -67,7 +69,13 @@ h2 {
 
 .player-institucional-br {
 	background-color: var(--player-institucional-br);
-  }
-  .player-estrangeiro {
+}
+.player-estrangeiro {
 	background-color: var(--player-estrangeiro);
-  }
+}
+.text-buy {
+	color:var(--text-buy);
+}
+.text-sell {
+	color:var(--text-sell);
+}
