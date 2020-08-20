@@ -34,6 +34,7 @@
       background: var(--background);
       padding: var(--padding);
       border: 1px solid;
+      z-index: 1;
     }
   
     .player small {

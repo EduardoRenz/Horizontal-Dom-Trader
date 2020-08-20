@@ -28,7 +28,6 @@
       if($lastPrice<price)
         return "text-buy"
     }
-
 </script>
 
 <style>

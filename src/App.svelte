@@ -15,14 +15,15 @@
   */
   const scrollHorizontal = (e) =>{
     e.preventDefault()
-    main.scrollBy(e.deltaY*20,e.deltaY*20);
+    main.scrollBy(e.deltaY*20,0);
   }
 
 </script>
 
 <style>
   main {
-	  overflow-x: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     display: grid;
     grid-template-areas:
       "header"
@@ -31,6 +32,8 @@
     grid-template-rows: 53px 1fr 102px;
     grid-area: main;
     display: flex;
+    max-height: calc(100% - 8px);
+
 
     /*
       Grid on background
