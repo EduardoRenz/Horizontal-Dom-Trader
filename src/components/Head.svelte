@@ -3,6 +3,9 @@
 </header>
 
 <style>
+    h2 {
+        color:var(--light-gray);
+    }
     header {
         box-shadow: var(--shadow);
         padding: 12px;

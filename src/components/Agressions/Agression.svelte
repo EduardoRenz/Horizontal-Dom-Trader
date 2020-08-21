@@ -1,6 +1,6 @@
 <script type="ts">
     import type IAgression from "./IAgression";
-    import { corretoras } from "../../../store";
+    import { corretoras } from "../../store";
     export let agression: IAgression;
 
     const playerClasses = ()=>{
@@ -16,8 +16,6 @@
 
       return classes
     }
-
-
   </script>
   
   <style>

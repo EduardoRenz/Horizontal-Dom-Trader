@@ -2,7 +2,7 @@
   import Icon from "@iconify/svelte";
   import icebergIcon from "@iconify/icons-openmoji/iceberg";
   import type IOffer from "./IOffer";
-  import { corretoras } from "../../../store";
+  import { corretoras } from "../../store";
   export let offer: IOffer;
 </script>
 

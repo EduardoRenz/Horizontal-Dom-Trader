@@ -4,11 +4,12 @@
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
-    import Offers from './Offers/Offers.svelte'
-    import Agressions from './Agressions/Agressions.svelte'
+    import Offers from '../Offers/Offers.svelte'
+    import Agressions from '../Agressions/Agressions.svelte'
+    import VAP from '../VAP/VAP.svelte'
     import type  { IMarker } from './IMarker'
-    import type IOffer from "./Offers/IOffer"
-    import type IAgression from "./Agressions/IAgression"
+    import type IOffer from "../Offers/IOffer"
+    import type IAgression from "../Agressions/IAgression"
 
     export let price : number
     export let markers : IMarker[] = null
@@ -105,6 +106,7 @@
       {price_total}
     </span>
     <Agressions agressions={price_agressions}/>
+    <VAP/>
   </article>
  
 
