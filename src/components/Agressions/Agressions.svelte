@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        height: 233px;
+        height: 200px;
     }
 </style>
 <div class="agressions">
@@ -17,5 +17,4 @@
             <Agression {agression} />
         {/each}
     {/if}
-
 </div>

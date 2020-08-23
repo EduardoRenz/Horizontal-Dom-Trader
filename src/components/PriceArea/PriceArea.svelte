@@ -46,7 +46,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-
   }
   .price-area {
     display: flex;
@@ -108,7 +107,4 @@
     <Agressions agressions={price_agressions}/>
     <VAP/>
   </article>
- 
-
-
 </div>

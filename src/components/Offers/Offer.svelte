@@ -13,6 +13,7 @@
     justify-content: space-between;
     font-size: 10px;
     height: 16px;
+    min-height: 16px;
     border-radius: 2px;
     margin-bottom: var(--margin);
     margin-right: 1px;
