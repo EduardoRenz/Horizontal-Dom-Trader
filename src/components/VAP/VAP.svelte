@@ -24,6 +24,7 @@
         maxSum = buysSum > sellSum ? buysSum : sellSum // max agression on this price
         buyPercent = ((buysSum * 100) / $maxVolume) || 1
         sellPercent = ((sellSum * 100) / $maxVolume) || 1
+        console.log(buyPercent,buysSum)
     }
     /**
      Set te max agression volume of all prices
@@ -32,6 +33,7 @@
         if(maxSum > $maxVolume) {
             maxVolume.set(maxSum)
         }
+        return $maxVolume
     }
 
     onMount(()=>{
@@ -41,6 +43,7 @@
         updateMaxVolume()
         updateBars()
     })
+
 
 
 </script>
