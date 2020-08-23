@@ -17,6 +17,8 @@
         font-weight: normal;
         font-size: 18px;
         line-height: 21px;
+        min-height: 31px;
+        max-height: 31px;
         display: flex;
         flex-direction: column;
         align-items: center;

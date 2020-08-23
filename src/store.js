@@ -35,7 +35,10 @@ export const agressions = writable(
         {agressor_id:3,time:123,price:5382.5,ticks_consumed:1,lots:15,type:'buy'},
         {agressor_id:2,time:124,price:5383.0,ticks_consumed:2,lots:100,type:'sell'},
         {agressor_id:1,time:124,price:5383.0,ticks_consumed:1,lots:100,type:'buy'},
-        {agressor_id:1,time:124,price:5384.0,ticks_consumed:1,lots:10,type:'sell'}
+        {agressor_id:1,time:124,price:5384.0,ticks_consumed:1,lots:10,type:'sell'},
+        {agressor_id:1,time:124,price:5385.0,ticks_consumed:1,lots:15,type:'sell'},
+        {agressor_id:1,time:124,price:5385.0,ticks_consumed:1,lots:15,type:'sell'},
+        {agressor_id:2,time:124,price:5385.0,ticks_consumed:1,lots:10,type:'buy'}
     ]
 )
 

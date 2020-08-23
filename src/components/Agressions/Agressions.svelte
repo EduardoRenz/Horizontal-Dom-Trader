@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        height: 200px;
+        min-height: 200px;
     }
 </style>
 <div class="agressions">

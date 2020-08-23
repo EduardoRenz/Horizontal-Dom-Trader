@@ -10,7 +10,8 @@
         flex-direction: column;
         justify-content: flex-end;
         height: 200px;
-        max-height: 200px;
+
+        min-height: 200px;
         overflow: hidden;
     }
 </style>

@@ -20,7 +20,6 @@
 
     let price_total = price_offers?.map( offer => offer.lots  ).reduce((acc,agg)=>{ return acc + agg },0) || 0
 
-
     const getPriceSumColor = () =>{
       if(price_total=== 0)
         return "text-light"
@@ -85,6 +84,8 @@
     margin-bottom: var(--margin);
     font-weight: bold;
     font-size: 16px;
+    min-height: 28px;
+    max-height: 28px;
   }
   .text-light {
     font-weight: normal;
@@ -105,6 +106,6 @@
       {price_total}
     </span>
     <Agressions agressions={price_agressions}/>
-    <VAP/>
+    <VAP agressions={price_agressions} />
   </article>
 </div>
