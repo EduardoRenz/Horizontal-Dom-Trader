@@ -12,20 +12,10 @@
     let sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
 
     //Bar size calcs
-    let maxSum 
-    let buyPercent
-    let sellPercent 
+    $: maxSum = buysSum > sellSum ? buysSum : sellSum // max agression on this price
+    $: buyPercent = ((buysSum * 100) / $maxVolume) || 1
+    $: sellPercent =  ((sellSum * 100) / $maxVolume) || 1
 
-    /**
-     Update bar height's
-     **/
-    function updateBars() {
-        //Bar size calcs
-        maxSum = buysSum > sellSum ? buysSum : sellSum // max agression on this price
-        buyPercent = ((buysSum * 100) / $maxVolume) || 1
-        sellPercent = ((sellSum * 100) / $maxVolume) || 1
-        console.log(buyPercent,buysSum)
-    }
     /**
      Set te max agression volume of all prices
      **/
@@ -36,20 +26,13 @@
         return $maxVolume
     }
 
-    onMount(()=>{
-        updateBars()
-    })
     afterUpdate(()=>{
         updateMaxVolume()
-        updateBars()
     })
-
-
-
 </script>
 
 <section bind:this={vap} >
-    <div class="bar bar-buy" style={`height:${ buyPercent }px;`} >{buysSum}</div>
+    <div class="bar bar-buy" style={`height:${ buyPercent }px;`} >{buysSum} </div>
     <div class="bar bar-sell" style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
@@ -65,7 +48,7 @@
     }
     .bar {
         width: 113px;
-        overflow: hidden;
+      
         display: flex;
         align-items: center;
         justify-content: center;
