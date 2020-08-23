@@ -6,7 +6,8 @@ export const corretoras = {
     3: {"name":"UBS", "group":"player-hft" }
 }
 
-export const lastPrice = writable(5384.5);
+export let lastPrice = writable(5384.5); // Last Price agression
+export let maxVolume = writable(0); // Max agression volume on price
 
 export const offers = writable({
     5380.5: [{player_id:1,lots:5},{player_id:2,lots:15}],
@@ -38,7 +39,10 @@ export const agressions = writable(
         {agressor_id:1,time:124,price:5384.0,ticks_consumed:1,lots:10,type:'sell'},
         {agressor_id:1,time:124,price:5385.0,ticks_consumed:1,lots:15,type:'sell'},
         {agressor_id:1,time:124,price:5385.0,ticks_consumed:1,lots:15,type:'sell'},
-        {agressor_id:2,time:124,price:5385.0,ticks_consumed:1,lots:10,type:'buy'}
+        {agressor_id:2,time:124,price:5385.0,ticks_consumed:1,lots:10,type:'buy'},
+        {agressor_id:1,time:124,price:5385.5,ticks_consumed:1,lots:200,type:'sell'},
+        {agressor_id:2,time:124,price:5385.5,ticks_consumed:1,lots:200,type:'sell'},
+        {agressor_id:2,time:124,price:5385.5,ticks_consumed:1,lots:100,type:'buy'}
     ]
 )
 

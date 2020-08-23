@@ -1,8 +1,9 @@
 <script type="ts">
-    import { onMount } from 'svelte';
-
+    import { onMount,afterUpdate } from 'svelte';
+    import { maxVolume } from "../../store";
     import type IAgression from "../Agressions/IAgression"
     export let agressions : IAgression[] 
+    let vap // section element
 
     let buys =  agressions.filter(agression=> agression.type === 'buy')
     let sells =  agressions.filter(agression=>  agression.type === 'sell')
@@ -11,13 +12,34 @@
     let sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
 
     //Bar size calcs
-    let maxSum = buysSum > sellSum ? buysSum : sellSum
-    let buyPercent = ((buysSum * 100) / maxSum) || 1
-    let sellPercent = ((sellSum * 100) / maxSum) || 1
+    let maxSum 
+    let buyPercent
+    let sellPercent 
 
-    let vap // section element
+    /**
+     Update bar height's
+     **/
+    function updateBars() {
+        //Bar size calcs
+        maxSum = buysSum > sellSum ? buysSum : sellSum // max agression on this price
+        buyPercent = ((buysSum * 100) / $maxVolume) || 1
+        sellPercent = ((sellSum * 100) / $maxVolume) || 1
+    }
+    /**
+     Set te max agression volume of all prices
+     **/
+    function updateMaxVolume() {
+        if(maxSum > $maxVolume) {
+            maxVolume.set(maxSum)
+        }
+    }
+
     onMount(()=>{
-        console.log(vap.offsetHeight)
+        updateBars()
+    })
+    afterUpdate(()=>{
+        updateMaxVolume()
+        updateBars()
     })
 
 
