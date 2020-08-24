@@ -1,11 +1,11 @@
 <script type="ts">
-    import { lastPrice } from '../../store.js';
+    import { last_price } from '../../store.js';
     export let price : Number
 
     const setPriceColor = () => {
-        if($lastPrice === price)
+        if($last_price === price)
             return ""
-        return $lastPrice === price || $lastPrice < price ? "buy-area" : "sell-area"
+        return $last_price === price || $last_price < price ? "buy-area" : "sell-area"
     }
 </script>
 <style>

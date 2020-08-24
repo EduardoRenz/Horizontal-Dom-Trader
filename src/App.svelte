@@ -62,6 +62,6 @@
   <PriceArea price={5387.5} />
   <PriceArea price={5388.0} />
   <PriceArea price={5388.5} markers={[{name:'Ajuste Ant.', color:'rgba(50, 41, 179, 0.5)'}]} />
-  <PriceArea price={5389.0} />
+  <PriceArea price={5389.0} isLimit={true} />
 </main>
 <Footer />

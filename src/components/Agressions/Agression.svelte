@@ -56,14 +56,6 @@
       opacity: 0;
     }
 
-    .glow-buy {
-      box-shadow: 0px 0px 6px 1px rgba(0, 255, 41, 0.75);
-    }
-
-    .glow-sell {
-      box-shadow: 0px 0px 6px 1px #FF0000;
-    }
-  
   </style>
   
   <div class={`player ${playerClasses()}`} style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}>

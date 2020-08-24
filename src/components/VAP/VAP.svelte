@@ -1,6 +1,6 @@
 <script type="ts">
     import { onMount,afterUpdate } from 'svelte';
-    import { maxVolume } from "../../store";
+    import { max_volume,absortion_factor, max } from "../../store";
     import type IAgression from "../Agressions/IAgression"
     export let agressions : IAgression[] 
     let vap // section element
@@ -8,22 +8,46 @@
     let buys =  agressions.filter(agression=> agression.type === 'buy')
     let sells =  agressions.filter(agression=>  agression.type === 'sell')
 
-    let buysSum = buys.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
+    let buySum = buys.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
     let sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
 
     //Bar size calcs
-    $: maxSum = buysSum > sellSum ? buysSum : sellSum // max agression on this price
-    $: buyPercent = ((buysSum * 100) / $maxVolume) || 1
-    $: sellPercent =  ((sellSum * 100) / $maxVolume) || 1
+    $: maxSum = buySum > sellSum ? buySum : sellSum // max agression on this price
+    $: buyPercent = ((buySum * 100) / $max_volume) || 1
+    $: sellPercent =  ((sellSum * 100) / $max_volume) || 1
 
     /**
      Set te max agression volume of all prices
     **/
     function updateMaxVolume() {
-        if(maxSum > $maxVolume) {
-            maxVolume.set(maxSum)
+        if(maxSum > $max_volume) {
+            max_volume.set(maxSum)
         }
-        return $maxVolume
+        return $max_volume
+    }
+
+    /*
+     Define the classes of the bars
+    */
+    function setBarClasses (type) {
+        let classes = `bar bar-${type}`
+        if(type == 'buy' && buySum === 0)
+            classes += ' hidden'
+        if(type == 'sell' && sellSum === 0)
+            classes += ' hidden'
+
+        if(isAbsortion(type))
+            classes += ` glow-${type}`
+
+        return classes
+    }
+
+    function isAbsortion(type){
+
+        if(type === 'buy' && maxSum === buySum)
+            return (buySum / sellSum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
+        if(type === 'sell' && maxSum === sellSum)
+            return (sellSum / buySum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
     }
 
     afterUpdate(()=>{
@@ -32,8 +56,8 @@
 </script>
 
 <section bind:this={vap} >
-    <div class={`bar bar-buy ${buysSum === 0 ? 'hidden' : '' }`} style={`height:${ buyPercent }px;`} >{buysSum} </div>
-    <div class={`bar bar-sell ${sellSum === 0 ? 'hidden' : '' }`} style={`height:${ sellPercent }px`} >{sellSum}</div>
+    <div class={`${setBarClasses('buy')}`} style={`height:${ buyPercent }px;`} >{buySum} </div>
+    <div class={`${setBarClasses('sell')}`} style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
 <style>

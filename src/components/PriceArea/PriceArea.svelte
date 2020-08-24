@@ -1,6 +1,6 @@
 <!-- Represents the whole price column -->
 <script type="ts">
-    import { offers,agressions,lastPrice } from '../../store.js'
+    import { offers,agressions,last_price } from '../../store.js'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -23,9 +23,9 @@
     const getPriceSumColor = () =>{
       if(price_total=== 0)
         return "text-light"
-      if($lastPrice>price)
+      if($last_price>price)
         return "text-sell"
-      if($lastPrice<price)
+      if($last_price<price)
         return "text-buy"
     }
 </script>
@@ -99,7 +99,7 @@
   }
 </style>
 
-<div class={`price-area ${price == $lastPrice ? "current-price " : "" } `} class:limit={isLimit}>
+<div class={`price-area ${price == $last_price ? "current-price " : "" } `} class:limit={isLimit}>
   <header>
     <Note />
     <PriceMarker {markers} />
