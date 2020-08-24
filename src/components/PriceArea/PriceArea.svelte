@@ -52,7 +52,8 @@
     align-items: center;
 
     min-width: 117px;
-    height: calc(100% - 8px);
+    width: 117px;
+    height: calc(100% - 5px);
     margin-top: 4px;
 
     border-image: linear-gradient(
@@ -60,13 +61,17 @@
         rgba(255, 255, 255, 0),
         rgba(255, 255, 255, 0.2),
         rgba(255, 255, 255, 0)
-      )
-      1 100%;
-      border-width: 1px;
-      border-style: solid;
-      border-left: none; 
+    ) 1 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-left: none; 
 
   }
+
+  .current-price {
+    background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.2) 50.52%, rgba(196, 196, 196, 0) 100%);
+  }
+
   .limit {
     border-width:0 4px;
     border-image: linear-gradient(
@@ -94,7 +99,7 @@
   }
 </style>
 
-<div class="price-area" class:limit={isLimit}>
+<div class={`price-area ${price == $lastPrice ? "current-price " : "" } `} class:limit={isLimit}>
   <header>
     <Note />
     <PriceMarker {markers} />

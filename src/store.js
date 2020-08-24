@@ -29,6 +29,9 @@ export const offers = writable({
 
 export const agressions = writable(
     [
+        {agressor_id:1,time:121,price:5381.0,ticks_consumed:1,lots:15,type:'sell'},
+        {agressor_id:2,time:121,price:5381.0,ticks_consumed:1,lots:50,type:'buy'},
+        {agressor_id:2,time:122,price:5381.5,ticks_consumed:1,lots:5,type:'buy'},
         {agressor_id:1,time:121,price:5381.5,ticks_consumed:1,lots:5,type:'buy'},
         {agressor_id:2,time:122,price:5381.5,ticks_consumed:1,lots:5,type:'buy'},
         {agressor_id:3,time:122,price:5381.5,ticks_consumed:3,lots:300,type:'buy'},
@@ -36,7 +39,7 @@ export const agressions = writable(
         {agressor_id:3,time:123,price:5382.5,ticks_consumed:1,lots:15,type:'buy'},
         {agressor_id:2,time:124,price:5383.0,ticks_consumed:2,lots:100,type:'sell'},
         {agressor_id:1,time:124,price:5383.0,ticks_consumed:1,lots:100,type:'buy'},
-        {agressor_id:1,time:124,price:5384.0,ticks_consumed:1,lots:10,type:'sell'},
+        {agressor_id:1,time:124,price:5384.0,ticks_consumed:1,lots:5,type:'sell'},
         {agressor_id:2,time:124,price:5384.0,ticks_consumed:1,lots:10,type:'buy'},
         {agressor_id:1,time:124,price:5384.5,ticks_consumed:2,lots:200,type:'sell'},
         {agressor_id:2,time:124,price:5384.5,ticks_consumed:1,lots:200,type:'sell'},

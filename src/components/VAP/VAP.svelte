@@ -18,7 +18,7 @@
 
     /**
      Set te max agression volume of all prices
-     **/
+    **/
     function updateMaxVolume() {
         if(maxSum > $maxVolume) {
             maxVolume.set(maxSum)
@@ -32,8 +32,8 @@
 </script>
 
 <section bind:this={vap} >
-    <div class="bar bar-buy" style={`height:${ buyPercent }px;`} >{buysSum} </div>
-    <div class="bar bar-sell" style={`height:${ sellPercent }px`} >{sellSum}</div>
+    <div class={`bar bar-buy ${buysSum === 0 ? 'hidden' : '' }`} style={`height:${ buyPercent }px;`} >{buysSum} </div>
+    <div class={`bar bar-sell ${sellSum === 0 ? 'hidden' : '' }`} style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
 <style>
@@ -58,5 +58,8 @@
     }
     .bar-sell {
         background-color: var(--sell);
+    }
+    .hidden {
+        opacity: 0;
     }
 </style>
