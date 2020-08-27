@@ -10,30 +10,45 @@
 
 </script>
 
-<aside>
+<div id="clock">
     <Icon width="20px" height="20px" icon={clockFill} />
     <div class="clock-bottom">
         <h4>{now}</h4>
         <div class="triangle-down"></div>
     </div>
-</aside>
+</div>
 
 <style>
-    aside {
+    #clock {
         display: flex;
         justify-content: center;
         align-items: center;
         font-style: normal;
+        cursor: pointer;
+        padding: var(--padding) 5px;
+        border-radius: 3px;
+        transition: all 0.2s;
     }
+    #clock:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    #clock:hover .triangle-down {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 8px solid white;
+    }
+
+    
     h4 {
         font-style: normal;
         font-weight: normal;
         font-size: 21px;
-        line-height: 25px;
         margin-left: 10px;
+        user-select: none;
     }
 
     .clock-bottom{
+        margin-top: 9px;
         display: flex;
         flex-direction: column;
         align-items: center;
