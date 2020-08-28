@@ -14,7 +14,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
+        background: var(--darken-background);
         box-shadow: var(--shadow);
         padding: 12px;
         height: 100%;
