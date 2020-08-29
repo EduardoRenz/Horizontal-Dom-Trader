@@ -14,7 +14,7 @@ export let last_price = writable(5384.5); // Last Price agression
 export let min = writable(5380.5) // min price of the day
 export let max = writable(5389.0) // max price of the day
 export let max_volume = writable(0); // Max agression volume on price
-
+export let time_now = writable(new Date)
 
 // Market Actions
 export const offers = writable({
