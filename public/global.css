@@ -105,3 +105,19 @@ h4 {
 .glow-sell {
 box-shadow: 0px 0px 6px 1px #FF0000;
 }
+
+::-webkit-scrollbar {
+	width: 3px;
+	height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--darken-background); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--light-gray); 
+}
+
