@@ -17,6 +17,16 @@
         return main_date < date_to_compare;
     }
 
+    /**
+       Calculate if two date its close to each other according with minutes 
+    **/
+    function itsNearTime(date1:Date,date2:Date,minutes:number) {
+        return (date1.getTime() /60/1000) - (date2.getTime() /60/1000) < minutes
+    }
+
+    function isIndicatorNear(indicators:IIndicator[],date:Date,minutes:number){
+        return indicators.some(indicator=> itsNearTime(date,indicator.time,minutes))
+    }
 
     let indicators : IIndicator[] = [
         {name:'Payroll', time:new Date('2020-08-29 09:30:00'), relevance:3},
@@ -27,8 +37,9 @@
 
 </script>
 
-<div id="clock" bind:this={clock}>
-    <Icon width="20px" height="20px" icon={clockFill} />
+<div id="clock" bind:this={clock} class:blink={isIndicatorNear(indicators,$time_now,5)} >
+    
+    <Icon width="20px" height="20px" icon={clockFill}  />
     <div class="clock-bottom">
         <h4>{getFormatedTime($time_now)}</h4>
         <div class="triangle-down"></div>
@@ -72,8 +83,8 @@
         display: block;
     }
     #clock:hover .triangle-down {
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
         border-top: 8px solid white;
     }   
     .clock-bottom{
@@ -85,8 +96,8 @@
     .triangle-down {
         width: 20px;
         height: 0px;
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
         border-top: 8px solid #555;
     }
     .indicators-list {
@@ -106,6 +117,24 @@
     }
     .on-past {
         opacity: 0.5;
+    }
+
+    @keyframes blinker {
+        from {opacity: 1.0;}
+        to {opacity: 0.7;}
+    }
+    .blink{
+
+        
+    }
+    .blink h4 {
+        text-decoration: blink;
+        animation-name: blinker;
+        animation-duration: 0.6s;
+        animation-iteration-count:infinite;
+        animation-timing-function:ease-in-out;
+        animation-direction: alternate;
+        text-shadow: 0px 01px 15px white;
     }
 
 </style>
