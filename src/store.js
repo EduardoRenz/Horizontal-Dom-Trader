@@ -15,6 +15,7 @@ export let min = writable(5380.5) // min price of the day
 export let max = writable(5389.0) // max price of the day
 export let max_volume = writable(0); // Max agression volume on price
 
+
 // Market Actions
 export const offers = writable({
     5380.5: [{player_id:1,lots:5},{player_id:2,lots:15}],

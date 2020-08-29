@@ -1,23 +1,41 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import Icon from '@iconify/svelte';
     import clockFill from '@iconify/icons-bi/clock-fill';
-    let now : string ="loading..."
-    
+    import { getFormatedTime } from '../../utils'
+    import type  IIndicator from './IIndicator'
+    import Indicator from './Indicator.svelte'
+    let clock;
+    let clock_width;
+    let indicators : IIndicator[] = [{name:'Payroll', time:new Date('2020-01-02 10:00:00'), relevance:3}]
+
+    onMount(()=>{
+        clock_width = clock.offsetWidth
+    })
+
+    let time_now : string = getFormatedTime(new Date)
     setInterval(()=>{ 
-        const date = new Date()
-        now = ` ${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}:${String(date.getUTCSeconds()).padStart(2,"0")} ` ; 
+        time_now = getFormatedTime(new Date)
     },1000)  
+
 
 </script>
 
-<div id="clock">
+<div id="clock" bind:this={clock}>
     <Icon width="20px" height="20px" icon={clockFill} />
     <div class="clock-bottom">
-        <h4>{now}</h4>
+        <h4>{time_now}</h4>
         <div class="triangle-down"></div>
     </div>
-</div>
 
+    <ul class="indicators-list" style="width:{clock_width}px">
+        {#each indicators as indicator}
+            <li><Indicator {indicator} /></li>
+        {/each}
+
+    </ul>
+
+</div>
 <style>
     #clock {
         display: flex;
@@ -36,9 +54,7 @@
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
         border-top: 8px solid white;
-    }
-
-    
+    }   
     h4 {
         font-style: normal;
         font-weight: normal;
@@ -60,4 +76,16 @@
         border-right: 15px solid transparent;
         border-top: 8px solid #555;
     }
+    .indicators-list {
+        position: absolute;
+        top:40px;
+        display: block;
+        background-color: var(--background);
+        width:var(--clock-width);
+        border: 1px solid var(--light-gray);
+        z-index: 1;
+        list-style: none;
+        padding: 5px 4px;
+    }
+
 </style>
