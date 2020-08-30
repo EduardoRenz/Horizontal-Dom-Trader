@@ -19,6 +19,9 @@
   </script>
   
   <style>
+    small {
+      color:var(--light-text);
+    }
     .player {
       display: flex;
       align-items: center;

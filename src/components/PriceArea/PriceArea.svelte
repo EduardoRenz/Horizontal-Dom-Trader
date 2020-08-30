@@ -101,7 +101,7 @@
     align-items: center;
     text-align: center;
     margin-bottom:5px;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--light-text);
     font-size: 10px;
     height: 36px;
   }

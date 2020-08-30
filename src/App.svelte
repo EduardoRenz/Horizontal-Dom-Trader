@@ -9,9 +9,7 @@
 
 
   onMount(async () => {
-    main = document.querySelector('#main')
     main.addEventListener('wheel',scrollHorizontal)
-
     setInterval(()=>{ 
         time_now.set(new Date()) 
     },1000)  
@@ -51,7 +49,7 @@
 </style>
 
 <Head />
-<main id="main">
+<main bind:this={main}>
   <PriceArea price={5380.5} isLimit={true} />
   <PriceArea price={5381.0} markers={[{name:'Ajuste Ant.', color:'rgba(168, 168, 168, 0.5)'},{name:'VWAP', color:'rgba(0, 209, 255, 0.5)'}]} />
   <PriceArea price={5381.5} />
