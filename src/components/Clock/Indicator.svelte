@@ -6,7 +6,7 @@
     export let indicator : IIndicator
 </script>
 
-<div class="indicator">
+<div class="indicator" class:blink={true}>
     <time>{getFormatedTime(indicator.time)}</time>
     <small>{indicator.name}</small>
     <div class="relevance">
@@ -16,7 +16,6 @@
     </div>
 </div>
 <style>
-
     small {
         display: block;
         text-overflow: ellipsis;
@@ -39,4 +38,5 @@
     .indicator > * {
         margin:5px;
     }
+
 </style>

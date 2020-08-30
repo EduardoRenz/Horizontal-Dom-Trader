@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
 
@@ -75,4 +74,8 @@ export const agressions = writable(
 )
 
 
-
+export const indicators  = writable([
+    {name:'Payroll', time:new Date('2020-08-29 09:30:00'), relevance:3},
+    {name:'Indicador X longest name', time:new Date('2020-08-29 22:48:00'), relevance:1},
+    {name:'Fally', time:new Date('2020-08-29 23:43:00'), relevance:2}
+])
