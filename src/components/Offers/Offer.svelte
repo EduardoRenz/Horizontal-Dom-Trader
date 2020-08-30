@@ -23,6 +23,7 @@
     margin-left: var(--margin);
   }
   .player small {
+    color:white;
     font-size: 10px;
   }
 
