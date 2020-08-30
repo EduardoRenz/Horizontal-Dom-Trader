@@ -65,13 +65,10 @@
     border-width: 1px;
     border-style: solid;
     border-left: none; 
-
   }
-
   .current-price {
     background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.2) 50.52%, rgba(196, 196, 196, 0) 100%);
   }
-
   .limit {
     border-width:0 4px;
     border-image: linear-gradient(
@@ -99,7 +96,7 @@
   }
 </style>
 
-<div class={`price-area ${price == $last_price ? "current-price " : "" } `} class:limit={isLimit}>
+<section id={'price_'+price.toFixed(1).replace('.','_')} class={`price-area ${price == $last_price ? "current-price " : "" } `} class:limit={isLimit}>
   <header>
     <Note />
     <PriceMarker {markers} />
@@ -113,4 +110,4 @@
     <Agressions agressions={price_agressions}/>
     <VAP agressions={price_agressions} />
   </article>
-</div>
+</section>
