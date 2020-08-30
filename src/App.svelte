@@ -13,8 +13,6 @@
     setInterval(()=>{ 
         time_now.set(new Date()) 
     },1000)  
-
-
   });
   
   /*

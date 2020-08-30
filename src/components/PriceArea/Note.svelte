@@ -3,23 +3,32 @@
     import { onMount } from 'svelte';
     import Icon from '@iconify/svelte';
     import editFilled from '@iconify/icons-ant-design/edit-filled';
+    export let price : number
     let note_element;
     let editing = false;
     let note : string = ''
+    let price_id = 'price_'+price.toFixed(1).replace('.','_')
 
+    
     onMount(()=>{
+        note = localStorage.getItem(price_id) || ''
+        editing = isEditing()
         note_element.addEventListener('blur',()=> handleBlur())
     })
+
+    const isEditing = () => note.trim() == '' ? false : true
 
     const handleClick = ()=>{
         editing = true; 
         setTimeout(() =>{note_element.focus()},100)
     }
     const handleBlur = ()=>{
-        editing = note.trim() == '' ? false : true
+        editing = isEditing()
     }
     const handleKeyUp = (evt)=>{
         if(evt.key == "Enter") {
+            console.log('note changed')
+            localStorage.setItem(price_id,note)
             note_element.blur()
         }
     }
