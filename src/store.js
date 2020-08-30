@@ -35,6 +35,7 @@ export const offers = writable({
         
     ],
     5384.0: [{player_id:1,lots:10, iceberg:true}],
+    5385.0: [{player_id:2,lots:20},{player_id:3,lots:40}],
 })
 
 export const agressions = writable(
@@ -62,6 +63,7 @@ export const agressions = writable(
         {agressor_id:1,time:124,price:5385.5,ticks_consumed:1,lots:100,type:'sell'},
         {agressor_id:2,time:124,price:5385.5,ticks_consumed:1,lots:5,type:'sell'},
         {agressor_id:2,time:124,price:5385.5,ticks_consumed:1,lots:250,type:'buy'},
+        {agressor_id:3,time:124,price:5385.5,ticks_consumed:1,lots:250,type:'buy'},
         {agressor_id:2,time:124,price:5386.0,ticks_consumed:1,lots:20,type:'buy'},
         {agressor_id:2,time:124,price:5386.0,ticks_consumed:1,lots:20,type:'buy'},
         {agressor_id:1,time:124,price:5386.0,ticks_consumed:1,lots:50,type:'buy'},

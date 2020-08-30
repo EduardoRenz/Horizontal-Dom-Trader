@@ -9,14 +9,11 @@
     let clock;
     let clock_width;
     let indicator_near_minutes = 5
-
+    const dateIsLowerThan = (main_date:Date,date_to_compare:Date) => main_date < date_to_compare;
+    const isIndicatorNear = (indicators:IIndicator[],date:Date,minutes:number) => indicators.some(indicator=> itsNearTime(date,indicator.time,minutes))
     onMount(()=>{
         clock_width = clock.offsetWidth
     })
-
-    function dateIsLowerThan(main_date:Date,date_to_compare:Date){
-        return main_date < date_to_compare;
-    }
 
     /**
        Calculate if two date its close to each other according with minutes 
@@ -25,16 +22,8 @@
         return ((date1.getTime() /60/1000) - (date2.getTime() /60/1000) < minutes) && ((date2.getTime() /60/1000) - (date1.getTime() /60/1000)  < minutes)
     }
 
-    function isIndicatorNear(indicators:IIndicator[],date:Date,minutes:number){
-        return indicators.some(indicator=> itsNearTime(date,indicator.time,minutes))
-    }
-
-
-
 </script>
-
 <div id="clock" bind:this={clock} class:blink={isIndicatorNear($indicators,$time_now,indicator_near_minutes)} >
-    
     <Icon width="20px" height="20px" icon={clockFill}  />
     <div class="clock-bottom">
         <h4>{getFormatedTime($time_now)}</h4>
