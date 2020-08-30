@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { time_now } from './store'
+  import { time_now,last_agression_time, agressions } from './store'
   import Head from "./components/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   let main
+  last_agression_time.set($agressions.map(agression=>agression.time).reduce((agg,acc)=> agg.getTime() > acc.getTime() ? agg : acc ))
+
 
   onMount(async () => {
     main = document.querySelector('#main')

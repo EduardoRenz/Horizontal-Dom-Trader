@@ -1,6 +1,7 @@
 <!-- Represents the whole price column -->
 <script type="ts">
-    import { offers,agressions,last_price } from '../../store.js'
+    import { offers,agressions,last_price,last_agression_time } from '../../store.js'
+    import { getFormatedTime } from '../../utils'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -17,7 +18,7 @@
 
     const price_offers: IOffer[]  = $offers[price] 
     const price_agressions: IAgression[]  = $agressions.filter(agression=>agression.price === price)
-
+    let last_agression : Date = price_agressions?.map(agression => agression.time).reduce((agg,acc)=>{ return agg.getTime() > acc.getTime() ? agg : acc},price_agressions[0]?.time) 
     let price_total = price_offers?.map( offer => offer.lots  ).reduce((acc,agg)=>{ return acc + agg },0) || 0
 
     const getPriceSumColor = () =>{
@@ -31,7 +32,6 @@
 </script>
 
 <style>
-
   header {
     display: flex;
     flex-direction: column;
@@ -94,6 +94,20 @@
     opacity: 0.3;
     color: var(--light-gray);
   }
+  .price-last-agression {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom:5px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 10px;
+    height: 36px;
+  }
+  .last-agression {
+    font-weight: bold;
+  }
 </style>
 
 <section id={'price_'+price.toFixed(1).replace('.','_')} class={`price-area ${price == $last_price ? "current-price " : "" } `} class:limit={isLimit}>
@@ -107,6 +121,9 @@
     <span class={`price-sum ${getPriceSumColor()} `} >
       {price_total}
     </span>
+    <small class="price-last-agression" class:last-agression={$last_agression_time === last_agression }>
+     { last_agression && getFormatedTime(last_agression) ||''}
+    </small>
     <Agressions agressions={price_agressions}/>
     <VAP agressions={price_agressions} />
   </article>

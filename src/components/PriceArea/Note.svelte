@@ -23,11 +23,11 @@
         setTimeout(() =>{note_element.focus()},100)
     }
     const handleBlur = ()=>{
+        localStorage.setItem(price_id,note)
         editing = isEditing()
     }
     const handleKeyUp = (evt)=>{
         if(evt.key == "Enter") {
-            console.log('note changed')
             localStorage.setItem(price_id,note)
             note_element.blur()
         }
