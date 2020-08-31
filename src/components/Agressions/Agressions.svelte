@@ -2,7 +2,7 @@
     import Agression from './Agression.svelte'
     import type IAgression from "./IAgression"
     export let agressions : IAgression[] 
-    const MAX_AGRESSIONS_SHOW  = 10
+    const MAX_AGRESSIONS_SHOW  = 15
 </script>
 <style>
     .agressions {

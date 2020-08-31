@@ -14,9 +14,9 @@
         agressions.update(agr=> { return [
           { agressor_id:Math.floor(Math.random() * 3) + 1,
             time:new Date(),price:5384.5,
-            ticks_consumed:1,
-            lots:Math.floor(Math.random() * 50) + 1,
-            type:'sell'},...agr]})
+            ticks_consumed:Math.floor(Math.random() * 3) + 1,
+            lots:Math.floor(Math.random() * 50) + 5,
+            type:Math.floor(Math.random() * 2) +1 == 1  ? 'sell' : 'buy' },...agr]})
  
         offers.update(offrs => { 
           let new_offers = $offers

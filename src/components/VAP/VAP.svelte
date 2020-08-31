@@ -1,15 +1,16 @@
 <script type="ts">
     import { onMount,afterUpdate } from 'svelte';
+    import { derived } from 'svelte/store'
     import { max_volume,absortion_factor, max } from "../../store";
     import type IAgression from "../Agressions/IAgression"
     export let agressions : IAgression[] 
     let vap // section element
 
-    let buys =  agressions.filter(agression=> agression.type === 'buy')
-    let sells =  agressions.filter(agression=>  agression.type === 'sell')
+    $: buys =  agressions.filter(agression=> agression.type === 'buy')
+    $: sells =  agressions.filter(agression=>  agression.type === 'sell')
 
-    let buySum = buys.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
-    let sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
+    $: buySum = buys.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
+    $: sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
 
     //Bar size calcs
     $: maxSum = buySum > sellSum ? buySum : sellSum // max agression on this price
@@ -36,13 +37,11 @@
         if(type == 'sell' && sellSum === 0)
             classes += ' hidden'
 
-        if(isAbsortion(type))
-            classes += ` glow-${type}`
 
         return classes
     }
 
-    function isAbsortion(type){
+    function isAbsortion(type,sellSum){
 
         if(type === 'buy' && maxSum === buySum)
             return (buySum / sellSum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
@@ -56,8 +55,8 @@
 </script>
 
 <section bind:this={vap} >
-    <div class={`${setBarClasses('buy')}`} style={`height:${ buyPercent }px;`} >{buySum} </div>
-    <div class={`${setBarClasses('sell')}`} style={`height:${ sellPercent }px`} >{sellSum}</div>
+    <div class={`${setBarClasses('buy')}`}  class:glow-sell={isAbsortion('buy',buySum)}  style={`height:${ buyPercent }px;`} >{buySum} </div>
+    <div class={`${setBarClasses('sell')}`} class:glow-sell={isAbsortion('sell',sellSum)} style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
 <style>
