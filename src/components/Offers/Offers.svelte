@@ -28,7 +28,7 @@
 <div class="offers">
     <div class="triangle-up" style={`display:${offers?.length > 0 && offers?.length > OFFERS_TO_SHOW ? 'block' : 'none'}`}></div>
     {#if offers}
-        {#each offers.slice(0,10) as offer}
+        {#each offers.slice(0,OFFERS_TO_SHOW).reverse() as offer}
             <Offer {offer} />
         {/each}
     {/if}

@@ -3,7 +3,7 @@
     import { corretoras } from "../../store";
     export let agression: IAgression;
 
-    const playerClasses = ()=>{
+    const playerClasses = (agression)=>{
       let classes = `player agression-${agression.type} `
       if( agression.ticks_consumed === 0 )
         classes +=  'hidden '
@@ -61,7 +61,7 @@
 
   </style>
   
-  <div class={`player ${playerClasses()}`} style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}>
+  <div class={`player ${playerClasses(agression)}`} style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}>
     <span class="chip">{agression.lots}</span>
     <small>{corretoras[agression.agressor_id].name}</small>
     <span class={"player-color-circle " + corretoras[agression.agressor_id].group }></span>

@@ -3,13 +3,13 @@
     import { time_now,indicators } from '../../store'
     import Icon from '@iconify/svelte';
     import clockFill from '@iconify/icons-bi/clock-fill';
-    import { getFormatedTime } from '../../utils'
+    import { getFormatedTime,dateIsLowerThan } from '../../utils'
     import type  IIndicator from './IIndicator'
     import Indicator from './Indicator.svelte'
     let clock;
     let clock_width;
     let indicator_near_minutes = 5
-    const dateIsLowerThan = (main_date:Date,date_to_compare:Date) => main_date < date_to_compare;
+    
     const isIndicatorNear = (indicators:IIndicator[],date:Date,minutes:number) => indicators.some(indicator=> itsNearTime(date,indicator.time,minutes))
     onMount(()=>{
         clock_width = clock.offsetWidth

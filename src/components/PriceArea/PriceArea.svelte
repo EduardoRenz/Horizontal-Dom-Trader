@@ -2,7 +2,7 @@
 <script type="ts">
     import { derived } from 'svelte/store'
     import { offers,agressions,last_price,last_agression_time } from '../../store.js'
-    import { getFormatedTime } from '../../utils'
+    import { getFormatedTime,dateIsLowerThan } from '../../utils'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -19,17 +19,19 @@
 
     const price_agressions = derived(agressions,$agressions => $agressions.filter(agression=>agression.price === price))
     const price_offers = derived(offers,$offers => $offers[price] ) 
+    let price_total = derived( price_offers, () => $price_offers?.map( offer => offer.lots  )?.reduce((acc,agg)=>{ return acc + agg },0) || 0)
 
-    let last_agression : Date = $price_agressions?.map(agression => agression.time)?.reduce((agg,acc)=>{ return agg?.getTime() > acc?.getTime() ? agg : acc},price_agressions[0]?.time) || 0
-    let price_total = $price_offers?.map( offer => offer.lots  )?.reduce((acc,agg)=>{ return acc + agg },0) || 0
+    let last_agression = derived(price_agressions, ()=> $price_agressions?.map(agression => agression.time)
+                        .reduce((agg,acc)=>{ return dateIsLowerThan(acc,agg) ? agg : acc},price_agressions[0]?.time) || price_agressions[0]?.time)
 
-    const getPriceSumColor = () =>{
+    const getPriceSumColor = (price_total) =>{
       if(price_total=== 0)
         return "text-light"
       if($last_price>price)
         return "text-sell"
       if($last_price<price)
         return "text-buy"
+      return ''
     }
 </script>
 
@@ -120,11 +122,11 @@
   <article >
     <Offers offers={$price_offers} />
     <PriceLine {price} />
-    <span class={`price-sum ${getPriceSumColor()} `} >
-      {price_total}
+    <span class={`price-sum ${getPriceSumColor($price_total)} `} >
+      {$price_total}
     </span>
-    <small class="price-last-agression" class:last-agression={$last_agression_time === last_agression }>
-     { last_agression && getFormatedTime(last_agression) ||''}
+    <small class="price-last-agression" class:last-agression={$last_agression_time === $last_agression }>
+     { last_agression && getFormatedTime($last_agression) ||''}
     </small>
     <Agressions agressions={$price_agressions}/>
     <VAP agressions={$price_agressions} />
