@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { writable,derived } from 'svelte/store';
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
 
@@ -75,7 +75,7 @@ export const agressions = writable(
         {agressor_id:3,time:new Date('2020-08-29 09:32:28'),price:5386.0,ticks_consumed:1,lots:5,type:'sell'},
     ]
 )
-export let last_agression_time  = writable(null);
+export let last_agression_time  = derived(agressions,$agressions=>$agressions.map(agr=> agr.time).reduce((acc,agg) => acc.getTime() > agg.getTime()  ? acc : agg ));
 
 export const indicators  = writable([
     {name:'Payroll', time:new Date('2020-08-29 09:30:00'), relevance:3},

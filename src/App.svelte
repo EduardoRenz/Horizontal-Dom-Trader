@@ -5,22 +5,24 @@
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   let main
-  last_agression_time.set($agressions.map(agression=>agression.time).reduce((agg,acc)=> agg.getTime() > acc.getTime() ? agg : acc ))
-
 
   onMount(async () => {
     main.addEventListener('wheel',scrollHorizontal)
     setInterval(()=>{ 
         time_now.set(new Date()) 
         //Simulations
-        // agressions.update(agr=> { return [{agressor_id:3,time:new Date('2020-08-29 09:32:28'),price:5384.5,ticks_consumed:1,lots:5,type:'sell'},...agr]})
+        agressions.update(agr=> { return [
+          { agressor_id:Math.floor(Math.random() * 3) + 1,
+            time:new Date(),price:5384.5,
+            ticks_consumed:1,
+            lots:Math.floor(Math.random() * 50) + 1,
+            type:'sell'},...agr]})
  
-        // offers.update(offrs => { 
-        //   let new_offers = $offers
-        //   new_offers["5384.5"] = [{player_id:1,lots:10},...new_offers["5384.5"]]
-        //   return new_offers
-        // } )
-
+        offers.update(offrs => { 
+          let new_offers = $offers
+          new_offers["5384.5"] = [...new_offers["5384.5"],{player_id:Math.floor(Math.random() * 3) + 1,lots:Math.floor(Math.random() * 100) + 1}]
+          return new_offers
+        } )
     },1000)  
   });
   
