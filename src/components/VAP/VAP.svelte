@@ -25,11 +25,10 @@
         return $max_volume
     }
 
-    function isAbsortion(type,sellSum){
-
-        if(type === 'buy' && maxSum === buySum)
+    function isAbsortion(type,sum){
+        if(type === 'buy' && maxSum === sum)
             return (buySum / sellSum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
-        if(type === 'sell' && maxSum === sellSum)
+        if(type === 'sell' && maxSum === sum)
             return (sellSum / buySum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
     }
 
@@ -39,7 +38,7 @@
 </script>
 
 <section bind:this={vap} >
-    <div class="bar bar-buy"  class:hidden={buySum === 0} class:glow-sell={isAbsortion('buy',buySum)}  style={`height:${ buyPercent }px;`} >{buySum} </div>
+    <div class="bar bar-buy"  class:hidden={buySum === 0} class:glow-buy={isAbsortion('buy',buySum)}  style={`height:${ buyPercent }px;`} >{buySum} </div>
     <div class="bar bar-sell" class:hidden={sellSum === 0} class:glow-sell={isAbsortion('sell',sellSum)} style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
@@ -59,7 +58,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all var(--transition-speed) ease-in;
+        transition: height var(--transition-speed) ease-in;
     }
     .bar-buy {
         background-color: var(--buy);
