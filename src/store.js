@@ -83,6 +83,6 @@ export let last_agression_time  = derived(agressions,$agressions=>$agressions.ma
 
 export const indicators  = writable([
     {name:'Payroll', time:new Date('2020-08-29 09:30:00'), relevance:3},
-    {name:'Indicador X longest name', time:new Date('2020-08-29 22:48:00'), relevance:1},
-    {name:'Fally', time:new Date('2020-08-29 23:43:00'), relevance:2}
+    {name:'Indicador X longest name', time:new Date(), relevance:1},
+    {name:'Fally', time:new Date('2020-10-29 23:43:00'), relevance:2}
 ])
