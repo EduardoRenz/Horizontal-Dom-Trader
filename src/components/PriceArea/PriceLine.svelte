@@ -19,6 +19,7 @@
         align-items: center;
         text-align: center;
         align-content: center;
+        transition: all calc(var(--transition-speed)*3) ease-in;
     }
     .sell-area {
         background: var(--sell-light);

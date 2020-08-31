@@ -105,7 +105,7 @@
   }
 </style>
 
-<section id={'price_'+price.toFixed(1).replace('.','_')} class={`price-area ${price == $last_price ? "current-price " : "" } `} class:limit={isLimit}>
+<section id={'price_'+price.toFixed(1).replace('.','_')} class="price-area" class:current-price={price == $last_price} class:limit={isLimit}>
   <header>
     <Note {price} />
     <PriceMarker {markers} />
