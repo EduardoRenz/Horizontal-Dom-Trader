@@ -8,6 +8,10 @@ export const corretoras = {
     3: {"name":"UBS", "group":"player-hft" }
 }
 
+
+// Configuration
+export let agressions_limit_show = 100 // max number of agressions to stay on screen
+
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression
 export let min = writable(5380.5) // min price of the day
@@ -70,7 +74,7 @@ export const agressions = writable(
         {agressor_id:1,time:new Date('2020-08-29 09:32:12'),price:5386.0,ticks_consumed:1,lots:50,type:'buy'},
         {agressor_id:2,time:new Date('2020-08-29 09:32:15'),price:5386.0,ticks_consumed:1,lots:40,type:'buy'},
         {agressor_id:2,time:new Date('2020-08-29 09:32:16'),price:5386.0,ticks_consumed:2,lots:140,type:'buy'},
-        {agressor_id:2,time:new Date('2020-08-29 09:32:23'),price:5386.0,ticks_consumed:1,lots:40,type:'buy'},
+        {agressor_id:2,time:new Date('2020-08-29 09:32:23'),price:5386.0,ticks_consumed:1,lots:400,type:'buy'},
         {agressor_id:2,time:new Date('2020-08-29 09:32:26'),price:5386.0,ticks_consumed:2,lots:140,type:'buy'},
         {agressor_id:3,time:new Date('2020-08-29 09:32:28'),price:5386.0,ticks_consumed:1,lots:5,type:'sell'},
     ]

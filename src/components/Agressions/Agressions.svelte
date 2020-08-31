@@ -1,8 +1,8 @@
 <script type="ts">
     import Agression from './Agression.svelte'
     import type IAgression from "./IAgression"
-    export let agressions : IAgression[] 
-    const MAX_AGRESSIONS_SHOW  = 15
+    export let price_agressions : IAgression[] 
+    const MAX_AGRESSIONS_SHOW  = 15 // limit to slice in this price
 </script>
 <style>
     .agressions {
@@ -15,8 +15,8 @@
     
 </style>
 <div class="agressions">
-    {#if agressions}
-        {#each agressions.slice(0,MAX_AGRESSIONS_SHOW) as agression}
+    {#if price_agressions}
+        {#each price_agressions.slice(0,MAX_AGRESSIONS_SHOW) as agression}
             <Agression {agression} />
         {/each}
     {/if}
