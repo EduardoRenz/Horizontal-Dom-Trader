@@ -6,6 +6,7 @@
 	--padding:2px;
 	--opacity:0.4;
 	--player-size: 116px;
+	--transition-speed : 0.1s;
 
 	--border:#A5A5A5;
 	--buy:rgba(126, 255, 0, 0.5);

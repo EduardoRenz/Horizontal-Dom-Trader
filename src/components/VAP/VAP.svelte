@@ -8,10 +8,8 @@
 
     $: buys =  agressions.filter(agression=> agression.type === 'buy')
     $: sells =  agressions.filter(agression=>  agression.type === 'sell')
-
     $: buySum = buys.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
     $: sellSum = sells.map(b=>{ return b.lots}).reduce((agg,acc)=>{ return agg+acc},0)
-
     //Bar size calcs
     $: maxSum = buySum > sellSum ? buySum : sellSum // max agression on this price
     $: buyPercent = ((buySum * 100) / $max_volume) || 1
@@ -25,20 +23,6 @@
             max_volume.set(maxSum)
         }
         return $max_volume
-    }
-
-    /*
-     Define the classes of the bars
-    */
-    function setBarClasses (type) {
-        let classes = `bar bar-${type}`
-        if(type == 'buy' && buySum === 0)
-            classes += ' hidden'
-        if(type == 'sell' && sellSum === 0)
-            classes += ' hidden'
-
-
-        return classes
     }
 
     function isAbsortion(type,sellSum){
@@ -55,8 +39,8 @@
 </script>
 
 <section bind:this={vap} >
-    <div class={`${setBarClasses('buy')}`}  class:glow-sell={isAbsortion('buy',buySum)}  style={`height:${ buyPercent }px;`} >{buySum} </div>
-    <div class={`${setBarClasses('sell')}`} class:glow-sell={isAbsortion('sell',sellSum)} style={`height:${ sellPercent }px`} >{sellSum}</div>
+    <div class="bar bar-buy"  class:hidden={buySum === 0} class:glow-sell={isAbsortion('buy',buySum)}  style={`height:${ buyPercent }px;`} >{buySum} </div>
+    <div class="bar bar-sell" class:hidden={sellSum === 0} class:glow-sell={isAbsortion('sell',sellSum)} style={`height:${ sellPercent }px`} >{sellSum}</div>
 </section>
 
 <style>
@@ -75,6 +59,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all var(--transition-speed) ease-in;
     }
     .bar-buy {
         background-color: var(--buy);

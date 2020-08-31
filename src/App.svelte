@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { time_now,last_agression_time, agressions, offers } from './store'
+  import { time_now,last_agression_time, agressions, offers,last_price } from './store'
   import Head from "./components/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
@@ -10,19 +10,35 @@
     main.addEventListener('wheel',scrollHorizontal)
     setInterval(()=>{ 
         time_now.set(new Date()) 
+
+
         //Simulations
+
+        last_price.update(last=> {
+          let newn = Math.random() <= 0.5 ? -0.5 : 0.5
+          if(last + newn  >= 5389.0 || last + newn <= 5380.5)
+            return last
+
+          return last + newn
+        } )  ;
+
         agressions.update(agr=> { return [
           { agressor_id:Math.floor(Math.random() * 3) + 1,
-            time:new Date(),price:5384.5,
+            time:new Date(),price:$last_price,
             ticks_consumed:Math.floor(Math.random() * 3) + 1,
             lots:Math.floor(Math.random() * 50) + 5,
             type:Math.floor(Math.random() * 2) +1 == 1  ? 'sell' : 'buy' },...agr]})
  
         offers.update(offrs => { 
           let new_offers = $offers
-          new_offers["5384.5"] = [...new_offers["5384.5"],{player_id:Math.floor(Math.random() * 3) + 1,lots:Math.floor(Math.random() * 100) + 1}]
+          if(!new_offers[$last_price])
+            new_offers[$last_price] = []
+          new_offers[$last_price] = [...new_offers[$last_price],{player_id:Math.floor(Math.random() * 3) + 1,lots:Math.floor(Math.random() * 100) + 1}]
           return new_offers
         } )
+
+ 
+   
     },1000)  
   });
   

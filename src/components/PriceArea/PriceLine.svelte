@@ -2,10 +2,10 @@
     import { last_price } from '../../store.js';
     export let price : Number
 
-    const setPriceColor = () => {
-        if($last_price === price)
+    const setPriceColor = (price,last_price) => {
+        if(last_price === price)
             return ""
-        return $last_price === price || $last_price < price ? "buy-area" : "sell-area"
+        return last_price === price || last_price < price ? "buy-area" : "sell-area"
     }
 </script>
 <style>
@@ -35,6 +35,6 @@
         border:1px solid transparent;
     }
 </style>
-<div class="price {setPriceColor()}" >
+<div class="price {setPriceColor(price,$last_price)}" >
     {price.toFixed(1)}
 </div>
