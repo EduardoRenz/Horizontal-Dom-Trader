@@ -35,6 +35,7 @@ export const offers = writable({
         
     ],
     5384.0: [{player_id:1,lots:10, iceberg:true}],
+    5384.5: [],
     5385.0: [{player_id:2,lots:20},{player_id:3,lots:40}],
 })
 

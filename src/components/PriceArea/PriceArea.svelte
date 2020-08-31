@@ -1,5 +1,6 @@
 <!-- Represents the whole price column -->
 <script type="ts">
+    import { derived } from 'svelte/store'
     import { offers,agressions,last_price,last_agression_time } from '../../store.js'
     import { getFormatedTime } from '../../utils'
     import Note from './Note.svelte'
@@ -16,10 +17,11 @@
     export let markers : IMarker[] = null
     export let isLimit : boolean = false
 
-    const price_offers: IOffer[]  = $offers[price] 
-    const price_agressions: IAgression[]  = $agressions.filter(agression=>agression.price === price)
-    let last_agression : Date = price_agressions?.map(agression => agression.time).reduce((agg,acc)=>{ return agg.getTime() > acc.getTime() ? agg : acc},price_agressions[0]?.time) 
-    let price_total = price_offers?.map( offer => offer.lots  ).reduce((acc,agg)=>{ return acc + agg },0) || 0
+    const price_agressions = derived(agressions,$agressions => $agressions.filter(agression=>agression.price === price))
+    const price_offers = derived(offers,$offers => $offers[price] ) 
+
+    let last_agression : Date = $price_agressions?.map(agression => agression.time)?.reduce((agg,acc)=>{ return agg?.getTime() > acc?.getTime() ? agg : acc},price_agressions[0]?.time) || 0
+    let price_total = $price_offers?.map( offer => offer.lots  )?.reduce((acc,agg)=>{ return acc + agg },0) || 0
 
     const getPriceSumColor = () =>{
       if(price_total=== 0)
@@ -116,7 +118,7 @@
     <PriceMarker {markers} />
   </header>
   <article >
-    <Offers offers={price_offers} />
+    <Offers offers={$price_offers} />
     <PriceLine {price} />
     <span class={`price-sum ${getPriceSumColor()} `} >
       {price_total}
@@ -124,7 +126,7 @@
     <small class="price-last-agression" class:last-agression={$last_agression_time === last_agression }>
      { last_agression && getFormatedTime(last_agression) ||''}
     </small>
-    <Agressions agressions={price_agressions}/>
-    <VAP agressions={price_agressions} />
+    <Agressions agressions={$price_agressions}/>
+    <VAP agressions={$price_agressions} />
   </article>
 </section>

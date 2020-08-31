@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { time_now,last_agression_time, agressions } from './store'
+  import { time_now,last_agression_time, agressions, offers } from './store'
   import Head from "./components/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
@@ -12,6 +12,15 @@
     main.addEventListener('wheel',scrollHorizontal)
     setInterval(()=>{ 
         time_now.set(new Date()) 
+        //Simulations
+        // agressions.update(agr=> { return [{agressor_id:3,time:new Date('2020-08-29 09:32:28'),price:5384.5,ticks_consumed:1,lots:5,type:'sell'},...agr]})
+ 
+        // offers.update(offrs => { 
+        //   let new_offers = $offers
+        //   new_offers["5384.5"] = [{player_id:1,lots:10},...new_offers["5384.5"]]
+        //   return new_offers
+        // } )
+
     },1000)  
   });
   
