@@ -2,20 +2,6 @@
     import type IAgression from "./IAgression";
     import { corretoras } from "../../store";
     export let agression: IAgression;
-
-    const playerClasses = (agression)=>{
-      let classes = `player agression-${agression.type} `
-      if( agression.ticks_consumed === 0 )
-        classes +=  'hidden '
-
-      if(agression.ticks_consumed > 1 && agression.type === 'buy' )
-        classes += 'glow-buy '
-
-      if(agression.ticks_consumed > 1 && agression.type === 'sell' )
-        classes += 'glow-sell '
-
-      return classes
-    }
   </script>
   
   <style>
@@ -61,7 +47,15 @@
 
   </style>
   
-  <div class={`player ${playerClasses(agression)}`} style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}>
+  <div 
+  class="player"
+  class:agression-buy={agression.type=='buy'}
+  class:agression-sell={agression.type=='sell'}
+  class:hidden={agression.ticks_consumed ==0}
+  class:glow-buy={agression.ticks_consumed > 1 && agression.type === 'buy'}
+  class:glow-sell={agression.ticks_consumed > 1 && agression.type === 'sell'}
+  style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}
+  >
     <span class="chip">{agression.lots}</span>
     <small>{corretoras[agression.agressor_id].name}</small>
     <span class={"player-color-circle " + corretoras[agression.agressor_id].group }></span>

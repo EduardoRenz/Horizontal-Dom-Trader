@@ -12,7 +12,6 @@
         min-height: 200px;
         max-height: 200px;
     }
-    
 </style>
 <div class="agressions">
     {#if price_agressions}

@@ -1,7 +1,6 @@
 <script type="ts">
     import { last_price } from '../../store.js';
     export let price : Number
-
 </script>
 <style>
     .price {
