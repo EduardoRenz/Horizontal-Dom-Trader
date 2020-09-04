@@ -11,6 +11,11 @@ export const corretoras = {
 
 // Configuration
 export let agressions_limit_show = 250 // max number of agressions to stay on screen
+export let agressions_quantity_colors = [
+    {min:25,max:50,color:'green'},
+    {min:50,max:100,color:'#e38520'},
+    {min:101,max:Infinity,color:'red'},
+]
 
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression

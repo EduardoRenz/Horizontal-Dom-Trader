@@ -1,10 +1,9 @@
 <script type="ts">
-    import { onMount,afterUpdate } from 'svelte';
-    import { derived } from 'svelte/store'
+    import { afterUpdate } from 'svelte';
     import { max_volume,absortion_factor, max } from "../../store";
     import type IAgression from "../Agressions/IAgression"
     export let agressions : IAgression[] 
-    let vap // section element
+    let vap: any // section element
 
     $: buys =  agressions.filter(agression=> agression.type === 'buy')
     $: sells =  agressions.filter(agression=>  agression.type === 'sell')
@@ -15,9 +14,7 @@
     $: buyPercent = ((buySum * 100) / $max_volume) || 1
     $: sellPercent =  ((sellSum * 100) / $max_volume) || 1
 
-    /**
-     Set te max agression volume of all prices
-    **/
+     /** Set te max agression volume (of all prices) */
     function updateMaxVolume() {
         if(maxSum > $max_volume) {
             max_volume.set(maxSum)
@@ -25,7 +22,8 @@
         return $max_volume
     }
 
-    function isAbsortion(type,sum){
+    /** Checks if the agressios are an absortion, normaly taking a inbalanced agression type (ex 10%) */
+    function isAbsortion(type:string,sum:number){
         if(type === 'buy' && maxSum === sum)
             return (buySum / sellSum > absortion_factor) && (maxSum || 0 / $max_volume || 0) > 50
         if(type === 'sell' && maxSum === sum)
