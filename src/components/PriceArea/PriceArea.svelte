@@ -10,8 +10,6 @@
     import Agressions from '../Agressions/Agressions.svelte'
     import VAP from '../VAP/VAP.svelte'
     import type  { IMarker } from './IMarker'
-    import type IOffer from "../Offers/IOffer"
-    import type IAgression from "../Agressions/IAgression"
 
     export let price : number
     export let markers : IMarker[] = null

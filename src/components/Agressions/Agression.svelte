@@ -1,7 +1,19 @@
 <script type="ts">
+    import {onMount,afterUpdate} from 'svelte'
     import type IAgression from "./IAgression";
     import { corretoras } from "../../store";
     export let agression: IAgression;
+    let player
+    let offset = 0
+
+    afterUpdate(()=>{
+      player.style.transform = `translateY(${offset}px)`
+      offset+=18
+
+      if(offset >= 300) {
+        player.style.display = 'none'
+      }
+    })
   </script>
   
   <style>
@@ -22,6 +34,9 @@
       padding: var(--padding);
       border: 1px solid;
       z-index: 1;
+      position: absolute;
+      transition: transform var(--transition-speed) ease-out;
+  
     }
   
     .player small {
@@ -48,6 +63,7 @@
   </style>
   
   <div 
+  bind:this={player}
   class="player"
   class:agression-buy={agression.type=='buy'}
   class:agression-sell={agression.type=='sell'}

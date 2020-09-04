@@ -6,12 +6,14 @@
 </script>
 <style>
     .agressions {
-        display: flex;
+        display: inline;
         flex-direction: column;
         justify-content: flex-start;
         min-height: 200px;
         max-height: 200px;
+        position: relative;
     }
+
 </style>
 <div class="agressions">
     {#if price_agressions}

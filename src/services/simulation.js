@@ -2,6 +2,7 @@ import { agressions, offers, last_price } from '../store'
 
 
 export function simulate($last_price,$offers) {
+    let ticks = Math.floor(Math.random() * 3) + 1
     last_price.update(last => {
         let newn = Math.random() <= 0.5 ? -0.5 : 0.5
         if (last + newn >= 5389.0 || last + newn <= 5380.5)
@@ -14,7 +15,7 @@ export function simulate($last_price,$offers) {
             {
                 agressor_id: Math.floor(Math.random() * 3) + 1,
                 time: new Date(), price: $last_price,
-                ticks_consumed: 1, //Math.floor(Math.random() * 3) + 1,
+                ticks_consumed: 1,//ticks,
                 lots: Math.floor(Math.random() * 50) + 5,
                 type: Math.floor(Math.random() * 2) + 1 == 1 ? 'sell' : 'buy'
             }, ...agr]

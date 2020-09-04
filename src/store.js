@@ -10,7 +10,7 @@ export const corretoras = {
 
 
 // Configuration
-export let agressions_limit_show = 250 // max number of agressions to stay on screen
+export let agressions_limit_show = 100 // max number of agressions to stay on screen
 
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression
