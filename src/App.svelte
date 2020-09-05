@@ -1,11 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { time_now,last_agression_time, agressions, offers,last_price } from './store'
-  import Head from "./components/Head.svelte";
+  import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
   let main
+  const SCROLL_SENSIBILITY = 100
 
   onMount(async () => {
     main.addEventListener('wheel',scrollHorizontal)
@@ -14,16 +15,12 @@
       //Simulations
       simulate($last_price,$offers)
     },1000)  
-
-
   });
   
-  /*
-    Scroll the Main frame horizontaly
-  */
+  /* Scroll the Main frame horizontaly */
   const scrollHorizontal = (e) =>{
     e.preventDefault()
-    main.scrollBy(e.deltaY*20,0);
+    main.scrollBy(e.deltaY*SCROLL_SENSIBILITY,0);
   }
 
 </script>
@@ -41,6 +38,8 @@
     grid-area: main;
     display: flex;
     max-height: calc(100% - 8px);
+
+    scroll-behavior: smooth;
 
 
     /*

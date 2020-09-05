@@ -1,9 +1,14 @@
 <script>
-    import Clock from '../components/Clock/Clock.svelte'
+    import Clock from '../Clock/Clock.svelte'
+    import Toolbar from '../Head/Toolbar.svelte'
 </script>
 <header>
     <h2>Trader - DOLW20</h2>
-    <Clock/>
+    <div class="right">
+        <Toolbar/> 
+        <Clock/>
+    </div>
+
 </header>
 
 <style>
@@ -19,5 +24,10 @@
         padding: 12px;
         height: 100%;
         grid-area: header;
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
 </style>

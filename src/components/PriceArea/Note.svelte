@@ -34,7 +34,7 @@
     }
 
 </script>
-<div class="note-area" >
+<div class="note-area">
     <button class="edit-icon" style={`display:${editing ? 'none' : 'block'}`} on:click={handleClick}  >
         <Icon  icon={editFilled} width="24px" />
     </button>
@@ -43,6 +43,7 @@
 
 <style>
     input {
+        color:white;
         background: #3F4147;
         border-radius: 2px;
         height: 27px;
@@ -58,6 +59,7 @@
         flex-direction: column;
     }
     .edit-icon{
+        color:white;
         opacity: var(--opacity);
         margin: 4px 0;
     }

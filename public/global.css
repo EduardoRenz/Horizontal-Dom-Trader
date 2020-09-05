@@ -29,7 +29,6 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	color: white;
 	font-family:  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	scrollbar-width: thin;
 	background: none;
@@ -129,3 +128,30 @@ box-shadow: 0px 0px 6px 1px #FF0000;
 	to {opacity: 0.7;}
 }
 
+[data-title] {
+	position: relative;
+}
+  
+[data-title]:hover::before {
+content: attr(data-title);
+position: absolute;
+bottom: -26px;
+display: inline-block;
+padding: 3px 6px;
+border-radius: 2px;
+background: #000;
+color: #fff;
+font-size: 12px;
+font-family: sans-serif;
+white-space: nowrap;
+}
+[data-title]:hover::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 8px;
+display: inline-block;
+color: #fff;
+border: 8px solid transparent;	
+border-bottom: 8px solid #000;
+}

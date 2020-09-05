@@ -42,6 +42,7 @@
     height: 100%;
   }
   .price-area {
+    color:white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,6 +63,7 @@
     border-left: none; 
   }
   .current-price {
+    opacity: 1;
     background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, rgba(196, 196, 196, 0.2) 50.52%, rgba(196, 196, 196, 0) 100%);
   }
   .limit {
