@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount,afterUpdate } from 'svelte';
   import { time_now,last_agression_time, agressions, offers,last_price,follow_last_price } from './store'
-  import { lastPriceID } from './utils'
+  import { getPriceID } from './utils'
   import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
@@ -22,7 +22,7 @@
  $: $last_price, $follow_last_price && followPrice()
 
  function followPrice(){
-  document.querySelector(`#${lastPriceID($last_price)}`).scrollIntoView({
+  document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
   behavior: "smooth",
   block: "center" ,
   inline: 'center'

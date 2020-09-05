@@ -10,7 +10,7 @@
 
 
 
-    export const lastPriceID = (price:Number) : String =>{
+    export const getPriceID = (price:Number) : string =>{
         return 'price_'+price.toFixed(1).replace('.','_')
     }
     

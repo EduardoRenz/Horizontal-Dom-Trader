@@ -2,7 +2,7 @@
 <script type="ts">
     import { derived } from 'svelte/store'
     import { offers,agressions,last_price,last_agression_time,agressions_limit_show } from '../../store.js'
-    import { getFormatedTime,dateIsLowerThan } from '../../utils'
+    import { getFormatedTime,dateIsLowerThan , getPriceID} from '../../utils'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -107,7 +107,7 @@
   }
 </style>
 
-<section id={'price_'+price.toFixed(1).replace('.','_')} class="price-area" class:current-price={price == $last_price} class:limit={isLimit}>
+<section id={getPriceID(price)} class="price-area" class:current-price={price == $last_price} class:limit={isLimit}>
   <header>
     <Note {price} />
     <PriceMarker {markers} />
