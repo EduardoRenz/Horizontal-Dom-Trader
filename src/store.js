@@ -17,6 +17,8 @@ export let agressions_quantity_colors = [
     {min:101,max:Infinity,color:'red'},
 ]
 
+export let follow_last_price = writable(false) // Use in Magnet button, for following the last price
+
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression
 export let min = writable(5380.5) // min price of the day

@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { time_now,last_agression_time, agressions, offers,last_price } from './store'
+  import { onMount,afterUpdate } from 'svelte';
+  import { time_now,last_agression_time, agressions, offers,last_price,follow_last_price } from './store'
+  import { lastPriceID } from './utils'
   import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
   let main
-  const SCROLL_SENSIBILITY = 100
+  const SCROLL_SENSIBILITY = 20
 
   onMount(async () => {
     main.addEventListener('wheel',scrollHorizontal)
@@ -16,6 +17,21 @@
       simulate($last_price,$offers)
     },1000)  
   });
+
+
+ $: $last_price, $follow_last_price && followPrice()
+
+ function followPrice(){
+  document.querySelector(`#${lastPriceID($last_price)}`).scrollIntoView({
+  behavior: "smooth",
+  block: "center" ,
+  inline: 'center'
+})
+
+ }
+
+
+
   
   /* Scroll the Main frame horizontaly */
   const scrollHorizontal = (e) =>{
@@ -38,20 +54,11 @@
     grid-area: main;
     display: flex;
     max-height: calc(100% - 8px);
-
-    scroll-behavior: smooth;
-
-
-    /*
-      Grid on background
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 2px);
-    background-attachment: local;
-    background-size:var(--column-size) ; */
   }
 </style>
 
 <Head />
-<main bind:this={main}>
+<main bind:this={main} >
   <PriceArea price={5380.5} isLimit={true} />
   <PriceArea price={5381.0} markers={[{name:'Ajuste Ant.', color:'rgba(168, 168, 168, 0.5)'},{name:'VWAP', color:'rgba(0, 209, 255, 0.5)'}]} />
   <PriceArea price={5381.5} />
