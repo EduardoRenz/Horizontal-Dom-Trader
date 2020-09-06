@@ -7,7 +7,7 @@
         follow_last_price.update(last=>last=!last)
     }
 </script>
-<button class:active={$follow_last_price} on:click={switchFollow}>
+<button class:active={$follow_last_price} on:click={switchFollow} data-title="Seguir o ultimo preço">
     <Icon icon={magnetIcon} style="color: #ffffff; font-size: 18px;" />
 </button>
 

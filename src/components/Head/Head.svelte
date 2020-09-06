@@ -3,7 +3,7 @@
     import Toolbar from '../Head/Toolbar.svelte'
 </script>
 <header>
-    <h2>Trader - DOLW20</h2>
+    <h2 >Trader - DOLW20</h2>
     <div class="right">
         <Toolbar/> 
         <Clock/>

@@ -6,16 +6,21 @@
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
+
+  import Popover from "./components/Popover"
+
+
   let main
   const SCROLL_SENSIBILITY = 20
 
   onMount(async () => {
+    Popover()
     main.addEventListener('wheel',scrollHorizontal)
     setInterval(()=>{ 
       time_now.set(new Date()) 
       //Simulations
       simulate($last_price,$offers)
-    },1000)  
+    },500)  
   });
 
 
