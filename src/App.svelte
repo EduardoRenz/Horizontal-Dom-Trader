@@ -29,7 +29,6 @@
  function followPrice(){
   document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
   behavior: "smooth",
-  block: "center" ,
   inline: 'center'
 })
 
