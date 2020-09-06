@@ -20,7 +20,7 @@
       time_now.set(new Date()) 
       //Simulations
       simulate($last_price,$offers)
-    },500)  
+    },1000)  
   });
 
 

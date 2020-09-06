@@ -21,24 +21,37 @@ export function simulate($last_price,$offers) {
             }, ...agr]
     })
 
+   
+
 
     offers.update(offrs => {
         let new_offers = offrs
+
+
         let keys = Object.keys(new_offers)
         let key_rand = Math.floor(Math.random() * keys.length)
         let key = keys[key_rand]
 
-        let random_offer = Math.floor(Math.random() * new_offers[key].length)
 
-        new_offers[key].splice(random_offer, 1)
 
-        return new_offers
-    })
-    offers.update(offrs => {
-        let new_offers = $offers
-        if (!new_offers[$last_price])
-            new_offers[$last_price] = []
-        new_offers[$last_price] = [...new_offers[$last_price], { player_id: Math.floor(Math.random() * 3) + 1, lots: Math.floor(Math.random() * 100) + 1 }]
+        for (let index = 0; index <1; index++) {
+            let newn = Math.random() <= 0.5 ? 0: 0.5
+            let new_price = Math.floor(Math.random() * (5389 - 5380.5 + 1) + 5380) + newn;  
+    
+
+            if(!new_offers[new_price])
+                new_offers[new_price] = []
+            if(new_offers[new_price] )
+                new_offers[new_price] = [...new_offers[new_price], { player_id: Math.floor(Math.random() * 3) + 1, lots: Math.floor(Math.random() * 100) + 1 }]
+    
+    
+            
+        }
+
+
+        if(new_offers[$last_price])
+            new_offers[$last_price].splice(0, 1)
+
         return new_offers
     })
 
