@@ -17,7 +17,7 @@
     export let markers : IMarker[] = null
     export let isLimit : boolean = false
 
-    const price_agressions = derived(agressions,$agressions => $agressions.slice(0,agressions_limit_show).filter(agression=>agression.price === price))
+    const price_agressions = derived(agressions,$agressions => $agressions.slice(0,$agressions_limit_show).filter(agression=>agression.price === price))
     const price_offers = derived(offers,$offers => $offers[price] ) 
     let price_total = derived( price_offers, () => $price_offers?.map( offer => offer.lots  )?.reduce((acc,agg)=>{ return acc + agg },0) || 0)
 

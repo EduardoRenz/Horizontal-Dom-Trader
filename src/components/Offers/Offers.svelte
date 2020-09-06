@@ -32,7 +32,7 @@
     <div class="triangle-up" style={`display:${offers?.length > 0 && offers?.length > OFFERS_TO_SHOW ? 'block' : 'none'}`}></div>
     {#if offers}
         {#each offers.slice(0,OFFERS_TO_SHOW).reverse() as offer(offer)}
-            <div in:receive="{{key: offer}}" out:send="{{key: offer}}" animate:flip>
+            <div in:receive="{{key: offer}}" out:send="{{key: offer}}" animate:flip="{{duration: 200}}">
                 <Offer {offer} />
             </div>
             
