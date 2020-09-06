@@ -6,9 +6,7 @@
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
-
   import Popover from "./components/Popover"
-
 
   let main
   const SCROLL_SENSIBILITY = 20
@@ -29,7 +27,6 @@
  function followPrice(){
   document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
   behavior: "smooth",
-  block: "center" ,
   inline: 'center'
 })
 

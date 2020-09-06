@@ -43,9 +43,6 @@ export function simulate($last_price,$offers) {
                 new_offers[new_price] = []
             if(new_offers[new_price] )
                 new_offers[new_price] = [...new_offers[new_price], { player_id: Math.floor(Math.random() * 3) + 1, lots: Math.floor(Math.random() * 100) + 1 }]
-    
-    
-            
         }
 
 
