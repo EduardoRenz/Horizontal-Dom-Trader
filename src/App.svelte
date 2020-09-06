@@ -1,29 +1,47 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { time_now,last_agression_time, agressions, offers,last_price } from './store'
-  import Head from "./components/Head.svelte";
+  import { onMount,afterUpdate } from 'svelte';
+  import { time_now,last_agression_time, agressions, offers,last_price,follow_last_price } from './store'
+  import { getPriceID } from './utils'
+  import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
+
+  import Popover from "./components/Popover"
+
+
   let main
+  const SCROLL_SENSIBILITY = 20
 
   onMount(async () => {
+    Popover()
     main.addEventListener('wheel',scrollHorizontal)
     setInterval(()=>{ 
       time_now.set(new Date()) 
       //Simulations
       simulate($last_price,$offers)
-    },1000)  
-
-
+    },500)  
   });
+
+
+ $: $last_price, $follow_last_price && followPrice()
+
+ function followPrice(){
+  document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
+  behavior: "smooth",
+  block: "center" ,
+  inline: 'center'
+})
+
+ }
+
+
+
   
-  /*
-    Scroll the Main frame horizontaly
-  */
+  /* Scroll the Main frame horizontaly */
   const scrollHorizontal = (e) =>{
     e.preventDefault()
-    main.scrollBy(e.deltaY*20,0);
+    main.scrollBy(e.deltaY*SCROLL_SENSIBILITY,0);
   }
 
 </script>
@@ -41,18 +59,11 @@
     grid-area: main;
     display: flex;
     max-height: calc(100% - 8px);
-
-
-    /*
-      Grid on background
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 2px);
-    background-attachment: local;
-    background-size:var(--column-size) ; */
   }
 </style>
 
 <Head />
-<main bind:this={main}>
+<main bind:this={main} >
   <PriceArea price={5380.5} isLimit={true} />
   <PriceArea price={5381.0} markers={[{name:'Ajuste Ant.', color:'rgba(168, 168, 168, 0.5)'},{name:'VWAP', color:'rgba(0, 209, 255, 0.5)'}]} />
   <PriceArea price={5381.5} />

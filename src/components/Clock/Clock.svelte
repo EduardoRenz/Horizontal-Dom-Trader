@@ -39,6 +39,9 @@
     </ul>
 </div>
 <style>
+    *{
+        color:white;
+    }
     h4 {
         font-size: 21px;
         margin-left: 10px;

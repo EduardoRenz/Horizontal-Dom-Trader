@@ -1,7 +1,7 @@
 <script type="ts">
     import {onMount,afterUpdate} from 'svelte'
     import type IAgression from "./IAgression";
-    import { corretoras } from "../../store";
+    import { corretoras, agressions_quantity_colors } from "../../store";
     export let agression: IAgression;
     let player
     let offset = 0
@@ -14,6 +14,12 @@
         player.style.display = 'none'
       }
     })
+
+    function getQuantityColor(quantity:Number) :String {
+      let found = agressions_quantity_colors?.find(color=>quantity>= color.min && quantity<=color.max)
+      return found?.color || ''
+    }
+
   </script>
   
   <style>
@@ -31,7 +37,7 @@
       margin-right: 1px;
       margin-left: 1px;
       background: var(--background);
-      padding: var(--padding);
+      padding: var(--padding) 1px;
       border: 1px solid;
       z-index: 1;
       position: absolute;
@@ -72,7 +78,7 @@
   class:glow-sell={agression.ticks_consumed > 1 && agression.type === 'sell'}
   style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}
   >
-    <span class="chip">{agression.lots}</span>
+    <span class="chip" style="background:{getQuantityColor(agression.lots)}">{agression.lots}</span>
     <small>{corretoras[agression.agressor_id].name}</small>
     <span class={"player-color-circle " + corretoras[agression.agressor_id].group }></span>
   </div>
