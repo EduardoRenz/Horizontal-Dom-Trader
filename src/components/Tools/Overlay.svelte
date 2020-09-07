@@ -1,12 +1,13 @@
 <script type="ts">
-    export let isOpen : boolean
+    export let modal : boolean = false
 </script>
 <div class="overlay">
+    <slot></slot>
     <slot name="button"></slot>
-    <div class="content" class:active={isOpen}>
+    <div class="content" class:active={modal}>
         <slot  name="content"></slot>
     </div>
-    <div class="overlay-background" on:click={e => isOpen = false}  class:active={isOpen}></div>
+    <div class="overlay-background" on:click={e => modal = false}  class:active={modal}></div>
 </div>
 <style>
     .overlay {

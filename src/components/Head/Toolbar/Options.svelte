@@ -14,7 +14,7 @@
 
 </script>
 
-<Overlay  bind:isOpen={modal}>
+<Overlay  bind:modal={modal}>
     <button slot="button" on:click={e => modal = !modal} class:active={modal}>
         <Icon icon={options2Fill} height="25px" style="color:white" />   
     </button>

@@ -49,7 +49,7 @@
 
     min-width: 117px;
     width: 117px;
-    height: calc(100% - 5px);
+    height: calc(100% - 10px);
     margin-top: 4px;
 
     border-image: linear-gradient(
