@@ -28,6 +28,6 @@
      <Icon icon={paintBrush} style="color: #ffffff; font-size: 18px;" />
     </button>
     <div slot="content" class="option-modal"> 
-s
+        s
     </div>
 </Overlay>
