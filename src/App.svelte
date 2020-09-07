@@ -6,7 +6,7 @@
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
-  import Popover from "./components/Popover"
+  import Popover from "./components/Tools/Popover"
 
   let main
   const SCROLL_SENSIBILITY = 20

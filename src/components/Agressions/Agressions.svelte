@@ -7,9 +7,6 @@
     import { flip } from 'svelte/animate';
     import {send,receive} from '../../utils'
 
-
-
-
 </script>
 <style>
     .agressions {
