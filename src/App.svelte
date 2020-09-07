@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount,afterUpdate } from 'svelte';
-  import { time_now,last_agression_time, agressions, offers,last_price,follow_last_price } from './store'
+  import { time_now,last_agression_time,  offers,last_price,follow_last_price } from './store'
   import { getPriceID } from './utils'
   import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from './services/simulation'
-  import Popover from "./components/Popover"
+  import Popover from "./components/Tools/Popover"
 
   let main
   const SCROLL_SENSIBILITY = 20
@@ -21,20 +21,22 @@
     },1000)  
   });
 
+  $: $last_price, $follow_last_price && followPrice()
 
- $: $last_price, $follow_last_price && followPrice()
+//  afterUpdate(()=>{
+//    if($follow_last_price)
+//     followPrice()
+//  })
 
  function followPrice(){
-  document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
-  behavior: "smooth",
-  inline: 'center'
-})
-
+    document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
+    behavior: "smooth",
+    inline: 'center',
+    block: 'center',
+  })
  }
 
 
-
-  
   /* Scroll the Main frame horizontaly */
   const scrollHorizontal = (e) =>{
     e.preventDefault()
@@ -55,7 +57,7 @@
     grid-template-rows: 53px 1fr 102px;
     grid-area: main;
     display: flex;
-    max-height: calc(100% - 8px);
+    max-height: calc(100%);
   }
 </style>
 

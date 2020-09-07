@@ -7,9 +7,6 @@
     import { flip } from 'svelte/animate';
     import {send,receive} from '../../utils'
 
-
-
-
 </script>
 <style>
     .agressions {
@@ -25,7 +22,7 @@
 <div class="agressions">
     {#if price_agressions}
         {#each price_agressions.slice(0,MAX_AGRESSIONS_SHOW) as agression(agression)}
-            <div in:receive="{{key: agression}}" out:send="{{key: agression}}"animate:flip >
+            <div in:receive="{{key: agression}}" out:send="{{key: agression}}"animate:flip="{{duration: 200}}" >
                 <Agression {agression} />
             </div>
         {/each}
