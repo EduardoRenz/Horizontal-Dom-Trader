@@ -4,7 +4,6 @@
     import { getQuantityColor } from "../../utils"
     export let agression: IAgression;
   </script>
-  
   <style>
     small {
       color:var(--light-text);

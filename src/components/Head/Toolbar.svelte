@@ -1,9 +1,11 @@
 <script>
     import Options from './Toolbar/Options.svelte'
     import Magnet from "./Toolbar/Magnet.svelte"
+    import Colors from "./Toolbar/Colors.svelte"
 </script>
 
 <span>
+    <Colors/>
     <Options/>
     <Magnet />
 </span>
