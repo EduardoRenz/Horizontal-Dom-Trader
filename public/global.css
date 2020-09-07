@@ -133,8 +133,6 @@ box-shadow: 0px 0px 6px 1px #FF0000;
 	to {opacity: 0.7;}
 }
 
-
-  
 .popover {
 	content: attr(data-title);
 	position: absolute;
@@ -147,8 +145,10 @@ box-shadow: 0px 0px 6px 1px #FF0000;
 	z-index: 100;
 	white-space: nowrap;
 	opacity: 0;
-	transition:var(--transition-speed) ease;
+	transition:var(--transition-speed) ease-in;
+	display: none;
 }
 .popover-parent:hover .popover {
 	opacity: 0.8;
+	display: inline-block;
 }

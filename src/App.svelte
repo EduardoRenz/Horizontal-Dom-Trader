@@ -18,7 +18,7 @@
       time_now.set(new Date()) 
       //Simulations
       simulate($last_price,$offers)
-    },500)  
+    },1000)  
   });
 
 
@@ -27,7 +27,7 @@
  function followPrice(){
   document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
   behavior: "smooth",
-  inline: 'center'
+  inline: 'center',
 })
 
  }
