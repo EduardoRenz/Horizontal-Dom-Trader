@@ -7,6 +7,7 @@
 	--opacity:0.4;
 	--player-size: 116px;
 	--transition-speed : 0.1s;
+	--border-radius:2px;
 
 
 	--primary:#4C8AE9;
@@ -78,6 +79,12 @@ h4 {
 	font-size: 16px;
 	text-align: center;
 	
+}
+
+legend {
+	font-size: 12px;
+	line-height: 14px;
+	color: var(--light-gray);
 }
 
 .chip {
