@@ -1,13 +1,8 @@
 <script type="ts">
     import type IAgression from "./IAgression";
-    import { corretoras, agressions_quantity_colors } from "../../store";
+    import { corretoras } from "../../store";
+    import { getQuantityColor } from "../../utils"
     export let agression: IAgression;
-
-    function getQuantityColor(quantity:Number) :String {
-      let found = agressions_quantity_colors?.find(color=>quantity>= color.min && quantity<=color.max)
-      return found?.color || ''
-    }
-
   </script>
   
   <style>
