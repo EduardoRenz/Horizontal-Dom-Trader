@@ -17,9 +17,9 @@ export let color_config = writable({
     offers:true,
     agressions:true,
     ranges:[
-        {min:25,max:50,color:'#059E5C',text_color:"#ffffff"},
-        {min:51,max:90,color:'#e38520',text_color:"#ffffff"},
-        {min:91,max:9999,color:'#BD1502',text_color:"#ffffff"},
+        {min:100,max:200,color:'#059E5C',text_color:"#ffffff"},
+        {min:201,max:300,color:'#e38520',text_color:"#ffffff"},
+        {min:301,max:9999,color:'#BD1502',text_color:"#ffffff"},
     ]
 })
 
