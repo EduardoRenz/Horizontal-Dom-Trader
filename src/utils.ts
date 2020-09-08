@@ -1,7 +1,7 @@
     import { quintOut } from 'svelte/easing';
     import { crossfade } from 'svelte/transition';
 
-    interface IColorRanges {
+    export interface IColorRanges {
       min:number,
       max:number,
       color:string,
