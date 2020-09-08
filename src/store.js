@@ -12,11 +12,16 @@ export const corretoras = {
 // Configuration
 export let follow_last_price = writable(false) // Use in Magnet button, for following the last price
 export let agressions_limit_show = writable(100) // max number of agressions to stay on screen
-export let agressions_quantity_colors = [
-    {min:25,max:40,color:'green'},
-    {min:41,max:48,color:'#e38520'},
-    {min:49,max:Infinity,color:'red'},
-]
+
+export let color_config = writable({
+    offers:true,
+    agressions:true,
+    ranges:[
+        {min:100,max:200,color:'#059E5C',text_color:"#ffffff"},
+        {min:201,max:300,color:'#e38520',text_color:"#ffffff"},
+        {min:301,max:9999,color:'#BD1502',text_color:"#ffffff"},
+    ]
+})
 
 
 
@@ -43,8 +48,6 @@ export const offers = writable({
         {player_id:2,lots:100},
         {player_id:3,lots:5},
         {player_id:1,lots:100},
-        
-        
     ],
     5384.0: [{player_id:1,lots:10, iceberg:true}],
     5384.5: [],
