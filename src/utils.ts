@@ -4,7 +4,8 @@
     interface IColorRanges {
       min:number,
       max:number,
-      color:string
+      color:string,
+      text_color:string
     }
     interface IColorConfig {
       offer:Boolean,
@@ -36,7 +37,7 @@
     });
     
     
-    export const getQuantityColor = (quantity:Number,ranges :IColorRanges[]) :String =>{
+    export const getQuantityColor = (quantity:Number,ranges :IColorRanges[]) :IColorRanges =>{
         let found = ranges?.find(color=>quantity>= color.min && quantity<=color.max)
-        return found?.color || ''
+        return found || null
     }

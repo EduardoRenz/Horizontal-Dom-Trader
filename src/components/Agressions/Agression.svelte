@@ -56,7 +56,7 @@
   class:glow-sell={agression.ticks_consumed > 1 && agression.type === 'sell'}
   style={`width:calc(var(--player-size) * ${agression.ticks_consumed} )`}
   >
-    <span class="chip" style="background:{getQuantityColor(agression.lots,$color_config.ranges)}">{agression.lots}</span>
+    <span class="chip" style="background:{$color_config.agressions ? getQuantityColor(agression.lots,$color_config.ranges) : ''}">{agression.lots}</span>
     <small>{corretoras[agression.agressor_id].name}</small>
     <span class={"player-color-circle " + corretoras[agression.agressor_id].group }></span>
   </div>

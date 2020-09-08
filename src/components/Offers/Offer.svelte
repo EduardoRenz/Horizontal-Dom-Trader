@@ -2,9 +2,13 @@
   import Icon from "@iconify/svelte";
   import icebergIcon from "@iconify/icons-openmoji/iceberg";
   import type IOffer from "./IOffer";
-  import { corretoras,color_config } from "../../store";
+  import { corretoras,color_config, offers } from "../../store";
   import { getQuantityColor } from "../../utils"
   export let offer: IOffer;
+
+ $: colors = ()=> getQuantityColor(offer?.lots,$color_config?.ranges) || ''
+
+
 </script>
 
 <style>
@@ -27,11 +31,10 @@
     color:white;
     font-size: 10px;
   }
-
 </style>
 
 <div class={'player ' + corretoras[offer.player_id].group}>
-  <span class="chip" style="background:{getQuantityColor(offer.lots,$color_config.ranges)}">{offer.lots}</span>
+  <span class="chip" style="background:{$color_config.offers ? colors().color : ''}; color:{$color_config.offers ? colors().text_color  : ''}">{offer.lots}</span>
   <small>{corretoras[offer.player_id].name}</small>
   <small>
     {#if offer.iceberg}
