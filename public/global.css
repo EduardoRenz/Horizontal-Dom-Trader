@@ -40,11 +40,6 @@ html {
 	background: none;
 	border:none;
 }
-
-button {
-	cursor: pointer;
-}
- 
 html, body {
 	position: relative;
 	background:var(--background);
@@ -58,7 +53,9 @@ body {
 						 'footer';
 	grid-template-rows: 53px 1fr 102px;
 }
-
+button {
+	cursor: pointer;
+}
 small {
 	color: var(--light-gray);
 	font-size: 10px;
@@ -92,6 +89,43 @@ input[type="number"]{
 	border: 1px solid var(--border);
 	color: white;
 	padding: var(--padding);
+}
+
+
+table {
+	width: 100%;
+	font-size: 12px;
+	line-height: 14px;
+	color: white;
+}
+
+td {
+	text-align: center;
+}
+tr {
+	width: 100%;
+}
+hr {
+	height: 1px;
+	background-color: var(--border);
+	opacity: 0.3;
+}
+
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: transparent;
+	background-image: url("data:image/svg+xml;utf8,<svg fill='rgba(255, 255, 255, 0.46)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+	background-repeat: no-repeat;
+	background-position-x: 100%;
+	
+	border: none;
+	border-radius: var(--border-radius);
+ 
+	color: white;
+}
+option {
+	color: white;
 }
 
 .chip {

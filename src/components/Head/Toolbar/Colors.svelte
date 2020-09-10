@@ -28,19 +28,6 @@
     margin-bottom:5px
   }
 
-  table {
-    width: 100%;
-    font-size: 12px;
-    line-height: 14px;
-    color: white;
-  }
-  
-  td {
-    text-align: center;
-  }
-  tr {
-    width: 100%;
-  }
 
   input[type="number"] {
     width: 100%;
