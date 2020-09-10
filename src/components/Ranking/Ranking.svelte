@@ -1,22 +1,47 @@
 <script>
     import { agressions, corretoras } from '../../store'
     import { groupBy } from "../../utils"
+    export let selected = "c_5"
+
+    let options = {
+        "c_5": { description:"Comprador - 5 Min", class:"buy"},
+        "c_10":{ description:"Comprador - 10 Min", class:"buy"},
+        "c_30":{ description:"Comprador - 30 Min", class:"buy"},
+        "v_5": { description:"Vendedor - 5 Min", class:"sell"},
+        "v_10":{ description:"Vendedor - 10 Min", class:"sell"},
+        "v_30":{ description:"Vendedor - 30 Min", class:"sell"},
+    }
+
 
     $: buys = $agressions.filter(a=>a.type=='buy')
     $: sells = $agressions.filter(a=>a.type=='sell')
     $: grouped_buys = groupBy(buys,'agressor_id')
     $: grouped_sells = groupBy(sells,'agressor_id')
+    $:buys_rank_data = sumLots(grouped_buys)
+
+    function sumLots(grouped){
+        let players = Object.keys(grouped)
+        let summed = []
+        for (const player of players) {
+            let sum = grouped[player].map(p=>p.lots).reduce((acc,agg)=>acc+agg,0)
+            let mean = grouped[player].map(p=>p.price).reduce((acc,agg)=>acc+agg,0) / grouped[player].length
+            summed.push({player_id:player,sum,mean})
+        }
+        return summed.sort((a,b)=>b.sum-a.sum)
+    }
+
+    function filteredByTime(option){
+        
+    }
+
 
 </script>
 <div class="ranking">
     <header>
-        <select >
-            <option value="c_5" class="buy" style="color:var(--buy)">Comprador - 5 Min</option>
-            <option value="c_10" class="buy" style="color:var(--buy)">Comprador - 10 Min</option>
-            <option value="c_30" class="buy" style="color:var(--buy)">Comprador - 30 Min</option>
-            <option value="v_5" class="sell" style="color:var(--sell)">Vendedor - 5 Min</option>
-            <option value="v_10" class="sell" style="color:var(--sell)">Vendedor - 10 Min</option>
-            <option value="v_30" class="sell" style="color:var(--sell)">Vendedor - 30 Min</option>
+        <select bind:value={selected}>
+            {#each Object.keys(options) as option}
+                <option value={option} class={options[option].class} >{options[option].description}</option>
+            {/each}
         </select>
         <hr>
     </header>
@@ -26,17 +51,16 @@
                 <th>Pos.</th>
                 <th>Corretora</th>
                 <th>Prc médio</th>
-                <th>Agressões</th>
+                <th>Lotes</th>
             </tr>
         </thead>
         <tbody>
-            {#each buys as player,i}
+            {#each buys_rank_data as rank,i}
                 <tr>
                     <td>{i+1}</td>
-                    <td>{player.lots}</td>
-                    <td></td>
-                    <td></td>
-
+                    <td>{corretoras[rank.player_id].name}</td>
+                    <td>{rank.mean.toFixed(2)}</td>
+                    <td>{rank.sum}</td>
                 </tr>
             {/each}
 
