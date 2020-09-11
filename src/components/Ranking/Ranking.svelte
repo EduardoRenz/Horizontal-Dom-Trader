@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
     import { afterUpdate } from 'svelte'
-    import { agressions, corretoras,time_now } from '../../store'
-    import { groupBy } from "../../utils"
+    import { agressions, corretoras, time_now, last_price } from '../../store'
+    import { groupBy,dateIsLowerThan } from "../../utils"
     export let selected = "c_5"
     let options = {
         "c_1": { description:"Comprador - 1 Min", class:"buy", time:1},
@@ -23,7 +23,7 @@
         let time = new Date( new Date().setMinutes( new Date().getMinutes() - minutes ))
         return list.filter(item=>item.time > time)
     }
-    const filter = (list,type) => (type) =>  list.filter(a=>a.type==type)
+    const filter = (list) => (type) =>  list.filter(a=>a.type==type)
 
     function sumLots(grouped){
         let players = Object.keys(grouped)
@@ -56,10 +56,13 @@
         </thead>
         <tbody>
             {#each rank_data as rank,i}
-                <tr>
-                    <td>{i+1}</td>
+                <tr style={`background:var(--${corretoras[rank.player_id].group})`}>
+                    <td>{i+1} {options[selected].class}</td>
                     <td>{corretoras[rank.player_id].name}</td>
-                    <td>{rank.mean.toFixed(2)}</td>
+                    <td 
+                        class:bg-sell={(options[selected].class === 'buy' && rank.mean > $last_price) || (options[selected].class === 'sell' && rank.mean < $last_price) }
+                        class:bg-buy={(options[selected].class === 'sell' && rank.mean > $last_price) || (options[selected].class === 'buy' && rank.mean < $last_price) }
+                         >{rank.mean.toFixed(2)}</td>
                     <td>{rank.sum}</td>
                 </tr>
             {/each}
@@ -75,7 +78,6 @@
     td{
         font-size: 11px;   
     }
-
     option{
         background: var(--background);
     }
@@ -95,6 +97,11 @@
     .sell {
         color: var(--sell);
     }
-
+    .bg-buy {
+        background: var(--buy);
+    }
+    .bg-sell {
+        background: var(--sell);
+    }
 
 </style>

@@ -2,8 +2,8 @@
     import Ranking from '../components/Ranking/Ranking.svelte'
 </script>
 <footer>
-    <Ranking/>
-    <Ranking/>
+    <Ranking selected={"c_5"} />
+    <Ranking selected={"v_5"}/>
 </footer>
 <style>
     footer {
