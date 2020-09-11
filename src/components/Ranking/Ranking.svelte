@@ -1,23 +1,29 @@
 <script>
-    import { agressions, corretoras } from '../../store'
+    import { afterUpdate } from 'svelte'
+    import { agressions, corretoras,time_now } from '../../store'
     import { groupBy } from "../../utils"
     export let selected = "c_5"
-
     let options = {
-        "c_5": { description:"Comprador - 5 Min", class:"buy"},
-        "c_10":{ description:"Comprador - 10 Min", class:"buy"},
-        "c_30":{ description:"Comprador - 30 Min", class:"buy"},
-        "v_5": { description:"Vendedor - 5 Min", class:"sell"},
-        "v_10":{ description:"Vendedor - 10 Min", class:"sell"},
-        "v_30":{ description:"Vendedor - 30 Min", class:"sell"},
+        "c_1": { description:"Comprador - 1 Min", class:"buy", time:1},
+        "c_5": { description:"Comprador - 5 Min", class:"buy", time:5},
+        "c_10":{ description:"Comprador - 10 Min", class:"buy", time:10},
+        "c_30":{ description:"Comprador - 30 Min", class:"buy", time:30},
+        "v_1": { description:"Vendedor - 1 Min", class:"sell", time:1},
+        "v_5": { description:"Vendedor - 5 Min", class:"sell", time:5},
+        "v_10":{ description:"Vendedor - 10 Min", class:"sell", time:10},
+        "v_30":{ description:"Vendedor - 30 Min", class:"sell", time:30},
     }
+    $: filtered_by_time = filteredByTime($agressions)(options[selected].time)
+    $: filtered_by_type = filter(filtered_by_time)(options[selected].class)
+    $: grouped = groupBy(filtered_by_type,'agressor_id')
+    $: rank_data = sumLots(grouped)
 
 
-    $: buys = $agressions.filter(a=>a.type=='buy')
-    $: sells = $agressions.filter(a=>a.type=='sell')
-    $: grouped_buys = groupBy(buys,'agressor_id')
-    $: grouped_sells = groupBy(sells,'agressor_id')
-    $:buys_rank_data = sumLots(grouped_buys)
+    const filteredByTime = (list) => (minutes) =>{
+        let time = new Date( new Date().setMinutes( new Date().getMinutes() - minutes ))
+        return list.filter(item=>item.time > time)
+    }
+    const filter = (list,type) => (type) =>  list.filter(a=>a.type==type)
 
     function sumLots(grouped){
         let players = Object.keys(grouped)
@@ -29,16 +35,10 @@
         }
         return summed.sort((a,b)=>b.sum-a.sum)
     }
-
-    function filteredByTime(option){
-        
-    }
-
-
 </script>
 <div class="ranking">
     <header>
-        <select bind:value={selected}>
+        <select bind:value={selected} class={options[selected].class}>
             {#each Object.keys(options) as option}
                 <option value={option} class={options[option].class} >{options[option].description}</option>
             {/each}
@@ -55,7 +55,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each buys_rank_data as rank,i}
+            {#each rank_data as rank,i}
                 <tr>
                     <td>{i+1}</td>
                     <td>{corretoras[rank.player_id].name}</td>
@@ -63,17 +63,18 @@
                     <td>{rank.sum}</td>
                 </tr>
             {/each}
-
         </tbody>
     </table>
 </div>
 <style>
     select {
         width: 100%;
-        height: 26px;
+        height: 20px;
         margin: var(--margin);
     }
-
+    td{
+        font-size: 11px;   
+    }
 
     option{
         background: var(--background);
@@ -82,11 +83,11 @@
         margin: 2px;
     }
     .ranking {
-    
- 
+        height: 100%;
         border: 1px solid var(--border);
         padding: var(--padding);
         gap:var(--margin);
+        min-width: 33%;
     }
     .buy {
         color: var(--buy);

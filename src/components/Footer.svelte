@@ -12,10 +12,9 @@
         grid-area: footer;
         box-shadow: var(--shadow);
         padding: var(--padding);
-        display: grid;
-        align-items: center;
+        display: flex;
+        align-items: flex-start;
         justify-content: start;
-        grid-template-columns: repeat(3,minmax(300px,33%));
         gap:2px;
     }
 </style>
