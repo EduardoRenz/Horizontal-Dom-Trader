@@ -5,7 +5,8 @@ export let absortion_factor = 10 // Percent for consider an absortion related to
 export const corretoras = {
     1: {"name":"Bradesco", "group":"player-institucional-br" },
     2: {"name":"Ideal", "group":"player-estrangeiro" },
-    3: {"name":"UBS", "group":"player-hft" }
+    3: {"name":"UBS", "group":"player-hft" },
+    4: {"name":"XP", "group":"player-institucional-br" }
 }
 
 

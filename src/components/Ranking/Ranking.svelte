@@ -2,6 +2,7 @@
     import { afterUpdate } from 'svelte'
     import { agressions, corretoras, time_now, last_price } from '../../store'
     import { groupBy,dateIsLowerThan } from "../../utils"
+    const MAX_PLAYERS_RANK = 3
     export let selected = "c_5"
     let options = {
         "c_1": { description:"Comprador - 1 Min", class:"buy", time:1},
@@ -55,7 +56,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each rank_data as rank,i}
+            {#each rank_data.slice(0,MAX_PLAYERS_RANK) as rank,i}
                 <tr style={`background:var(--${corretoras[rank.player_id].group})`}>
                     <td>{i+1} </td>
                     <td>{corretoras[rank.player_id].name}</td>
@@ -84,6 +85,7 @@
     hr {
         margin: 2px;
     }
+    
     .ranking {
         height: 100%;
         border: 1px solid var(--border);
