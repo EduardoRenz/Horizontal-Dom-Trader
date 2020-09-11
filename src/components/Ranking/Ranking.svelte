@@ -57,7 +57,7 @@
         <tbody>
             {#each rank_data as rank,i}
                 <tr style={`background:var(--${corretoras[rank.player_id].group})`}>
-                    <td>{i+1} {options[selected].class}</td>
+                    <td>{i+1} </td>
                     <td>{corretoras[rank.player_id].name}</td>
                     <td 
                         class:bg-sell={(options[selected].class === 'buy' && rank.mean > $last_price) || (options[selected].class === 'sell' && rank.mean < $last_price) }
@@ -89,7 +89,8 @@
         border: 1px solid var(--border);
         padding: var(--padding);
         gap:var(--margin);
-        min-width: 33%;
+        min-width: 240px;
+        min-width: 20%;
     }
     .buy {
         color: var(--buy);
