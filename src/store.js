@@ -1,14 +1,8 @@
 import { writable,derived } from 'svelte/store';
+import cors from "../public/assets/corretoras.json"
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
-
-export const corretoras = {
-    1: {"name":"Bradesco", "group":"player-institucional-br" },
-    2: {"name":"Ideal", "group":"player-estrangeiro" },
-    3: {"name":"UBS", "group":"player-hft" },
-    4: {"name":"XP", "group":"player-institucional-br" }
-}
-
+export const corretoras = cors
 
 // Configuration
 export let follow_last_price = writable(false) // Use in Magnet button, for following the last price

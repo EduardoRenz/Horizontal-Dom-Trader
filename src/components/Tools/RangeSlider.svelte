@@ -58,6 +58,7 @@ datalist {
     width: 100%;
     justify-content: space-between;
     display: flex;
+    margin-left: 5px;
 }
 
 datalist option {

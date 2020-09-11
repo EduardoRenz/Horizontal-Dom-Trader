@@ -20,7 +20,7 @@
     </button>
     <div slot="content" class="option-modal" >
         <legend>Quantidade de Agressões: <strong>{agression_limit}</strong></legend>
-        <RangeSlider bind:value={agression_limit} min={50} max={200} step={50} />
+        <RangeSlider bind:value={agression_limit} min={50} max={200} step={25} />
     </div>
 </Overlay>
 
