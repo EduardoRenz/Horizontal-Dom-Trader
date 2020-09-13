@@ -1,7 +1,9 @@
 <script>
-    import Ranking from '../components/Ranking/Ranking.svelte'
+    import Ranking from './Ranking/Ranking.svelte'
+    import Renkko from "./Charts/Renkko.svelte"
 </script>
 <footer>
+    <Renkko />
     <Ranking selected={"c_5"} />
     <Ranking selected={"v_5"}/>
 </footer>

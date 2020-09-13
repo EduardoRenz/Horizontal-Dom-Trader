@@ -3,11 +3,9 @@ import cors from "../public/assets/corretoras.json"
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
 export const corretoras = cors
-
 // Configuration
 export let follow_last_price = writable(false) // Use in Magnet button, for following the last price
 export let agressions_limit_show = writable(100) // max number of agressions to stay on screen
-
 export let color_config = writable({
     offers:true,
     agressions:true,
@@ -17,8 +15,6 @@ export let color_config = writable({
         {min:301,max:9999,color:'#BD1502',text_color:"#ffffff"},
     ]
 })
-
-
 
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression
