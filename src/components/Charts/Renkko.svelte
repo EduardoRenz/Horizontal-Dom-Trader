@@ -1,10 +1,19 @@
 <script>
+  import { onMount,afterUpdate } from "svelte";
+  import { Renkko } from "./Renkko.ts";
   import { agressions } from "../../store";
-  import { getFormatedTime } from "../../utils";
   const TIMES_TO_SHOW = 5;
   const PRICES_TO_SHOW = 4;
-  $: times = $agressions.map((agression) => agression.time);
-  $: prices = $agressions.map((agression) => agression.price);
+  let canvas, ctx;
+  let renkko
+  onMount(() => {
+    canvas = document.querySelector('#renkko')
+    renkko = new Renkko(canvas)
+  });
+
+  afterUpdate(()=>{
+    renkko.update($agressions)
+  })
 </script>
 
 <style>
@@ -41,21 +50,9 @@
   }
   .candles {
     grid-area: candles;
+    display: flex;
+    justify-content: space-around;
   }
 </style>
 
-<div class="renkko">
-  <div class="prices">
-    {#each prices.splice(0, PRICES_TO_SHOW).sort((a, b) => b - a) as price,i}
-      <span>{price.toFixed(1)}</span>
-    {/each}
-  </div>
-  <div class="candles">ca</div>
-
-  <div class="times">
-    {#each times.splice(0, TIMES_TO_SHOW) as time}
-      <span>{getFormatedTime(time)}</span>
-    {/each}
-    <span></span>
-  </div>
-</div>
+<canvas class="renkko" id="renkko" width="400" height="100" />
