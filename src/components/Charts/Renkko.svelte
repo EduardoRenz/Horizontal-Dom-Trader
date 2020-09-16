@@ -1,7 +1,7 @@
 <script>
   import { onMount,afterUpdate } from "svelte";
   import { Renkko } from "./Renkko.ts";
-  import { agressions } from "../../store";
+  import { agressions,last_price } from "../../store";
   const TIMES_TO_SHOW = 5;
   const PRICES_TO_SHOW = 4;
   let canvas, ctx;
@@ -12,7 +12,7 @@
   });
 
   afterUpdate(()=>{
-    renkko.update($agressions)
+    renkko.update($agressions.sort((a,b)=>b.time-a.time))
   })
 </script>
 
@@ -33,26 +33,6 @@
     grid-template-rows: 1fr 15px;
     grid-template-columns: 1fr 40px;
   }
-  .times {
-    grid-area: times;
-    height: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .prices {
-    grid-area: prices;
-    display: flex;
-    flex-direction: column;
-    width: auto;
-    align-items: flex-end;
-    justify-content: space-around;
-  }
-  .candles {
-    grid-area: candles;
-    display: flex;
-    justify-content: space-around;
-  }
 </style>
+<canvas class="renkko" id="renkko" height="700px" />
 
-<canvas class="renkko" id="renkko" width="400" height="100" />
