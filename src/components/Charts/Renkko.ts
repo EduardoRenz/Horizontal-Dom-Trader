@@ -1,26 +1,8 @@
 import type IAgression from "../Agressions/IAgression"
 import { getFormatedTime } from "../../utils"
 import  ChartElement  from "./ChartElement"
-interface ICandle {
-    x:number
-    y:number
-    width:number
-    height:number
-    color?:string
-    price:number
-    draw?(ctx: CanvasRenderingContext2D): void 
-}
-class Candle extends ChartElement implements ICandle {
-    static margin:number =5
-    price:number
-    width:number = 5
-    height:number = 10
-
-    constructor(coordinates:any,price:number,color:string){
-        super(coordinates,color)
-        this.price = price
-    }
-}
+import CanvasElement,{ICoordinates} from "./CanvasElement"
+import Candle from './Candle'
 
 class Label extends ChartElement {
     value: any
@@ -29,7 +11,7 @@ class Label extends ChartElement {
     width:number
     color:string = "white"
     static LABEL_MARGIN: number = 20
-    constructor(coordinates:any,value:any){
+    constructor(coordinates:ICoordinates,value:any){
         super(coordinates,null)
         this.value=value
     }
@@ -40,9 +22,7 @@ class Label extends ChartElement {
     }
 }
 
-export class Renkko {
-    canvas:HTMLCanvasElement 
-    ctx:CanvasRenderingContext2D
+export class Renkko extends CanvasElement {
     RIGHT_OFFSET: number = 40
     BOTTOM_OFFSET: number = 2
     Y_OFFSET = 10
@@ -54,15 +34,12 @@ export class Renkko {
     max_price:number
     min_price:number
     candles : Candle[] = []
+
     constructor(canvas:HTMLCanvasElement){
-        this.canvas = canvas
-        this.canvas.width = this.canvas.clientWidth;
-        this.canvas.height = this.canvas.clientHeight;
-        this.ctx =  canvas.getContext("2d");
+        super(canvas)
         this.CANDLE_AREA_RIGHT = this.canvas.width - 65
     }
-
-    drawXAxis(labels:string[]){
+    drawXLabels(labels:string[]){
         let numbs = 0
         for (const label of labels) {
             this.ctx.font = "12px Roboto"
@@ -71,17 +48,12 @@ export class Renkko {
             numbs+=80
         }
     }
-
-    drawYAxis(){
-        this.y_labels = []
-        for (const [index,price] of this.y_range.splice(0,4).entries()) {
-            let last_label = this.y_labels[index-1]
-            this.y_labels.push(new Label({x:this.canvas.width - this.RIGHT_OFFSET,y:(last_label?.y + Label.LABEL_MARGIN) || 0  },price))
-        }
+    public drawYLabels(){
         this.y_labels.forEach(label => {
             label.draw(this.ctx)
         });
     }
+
 
     drawCandles(agressions:IAgression[]){
         this.candles = []
@@ -99,7 +71,6 @@ export class Renkko {
                     },
                     agression.price,
                     candle_color
-      
                 ))
         }
         this.candles.forEach(candle => {
@@ -110,18 +81,30 @@ export class Renkko {
     update(agressions:IAgression[]){
         this.clear()
         this.getMinMaxY(agressions)
-        this.x_labels = agressions.map(agression=>getFormatedTime(agression.time))
-        this.y_range = this.generateRangeY()
-        this.drawXAxis(this.x_labels)
-        this.drawYAxis()
+        this.generateRangeY()
+        this.setXLabels(agressions)
+        this.setYLabels()
+
+        //this.drawYAxis()
+        //this.drawXLabels(this.x_labels)
         this.drawCandles(agressions)
+    }
+
+    private setXLabels(agressions: IAgression[]) {
+        this.x_labels = agressions.map(agression => getFormatedTime(agression.time))
     }
 
     private getMinMaxY(agressions: IAgression[]) {
         this.max_price = agressions.map(agression => agression.price).reduce((acc, agg) => acc > agg ? acc : agg)
         this.min_price = agressions.map(agression => agression.price).reduce((acc, agg) => acc < agg ? acc : agg)
     }
-
+    private setYLabels() {
+        this.y_labels = []
+        for (const [index, price] of this.y_range.splice(0, 4).entries()) {
+            let last_label = this.y_labels[index - 1]
+            this.y_labels.push(new Label({ x: this.canvas.width - this.RIGHT_OFFSET, y: (last_label?.y + Label.LABEL_MARGIN) || 0 }, price))
+        }
+    }
     /**
      * Generate the prices from min to max, incrementing by tick size
      */
@@ -130,7 +113,8 @@ export class Renkko {
         for (let index = this.min_price; index <= this.max_price; index+=this.PRICE_TICK) {
             values.push(index)
         }
-        return values.sort((a,b)=>b-a)
+        this.y_range = values.sort((a,b)=>b-a)
+        return this.y_range
     }
 
     clear() {
