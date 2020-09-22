@@ -13,7 +13,7 @@ export default class Candle extends ChartElement implements ICandle {
     static margin:number =5
     price:number
     width:number = 5
-    height:number = 10
+    height:number = 20
 
     constructor(coordinates:ICoordinates,price:number,color:string){
         super(coordinates,color)

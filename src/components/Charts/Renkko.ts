@@ -1,33 +1,15 @@
 import type IAgression from "../Agressions/IAgression"
 import { getFormatedTime } from "../../utils"
-import  ChartElement  from "./ChartElement"
-import CanvasElement,{ICoordinates} from "./CanvasElement"
+import CanvasElement from "./CanvasElement"
 import Candle from './Candle'
-
-class Label extends ChartElement {
-    value: any
-    x:number
-    y:number
-    width:number
-    color:string = "white"
-    static LABEL_MARGIN: number = 20
-    constructor(coordinates:ICoordinates,value:any){
-        super(coordinates,null)
-        this.value=value
-    }
-    draw(ctx:CanvasRenderingContext2D) : void {
-        ctx.font = "12px Roboto"
-        ctx.fillStyle = "white"
-        ctx.fillText(this.value.toFixed(1), this.x, this.y);
-    }
-}
-
+import Label from './Labels'
 export class Renkko extends CanvasElement {
     RIGHT_OFFSET: number = 40
     BOTTOM_OFFSET: number = 2
     Y_OFFSET = 10
     PRICE_TICK: number = 0.5
     CANDLE_AREA_RIGHT:number
+    LABEL_AREA_WIDTH = 64
     x_labels:string[]
     y_labels:Label[]
     y_range:number[]
@@ -37,9 +19,49 @@ export class Renkko extends CanvasElement {
 
     constructor(canvas:HTMLCanvasElement){
         super(canvas)
-        this.CANDLE_AREA_RIGHT = this.canvas.width - 65
+        this.CANDLE_AREA_RIGHT = this.canvas.width - this.LABEL_AREA_WIDTH
     }
-    drawXLabels(labels:string[]){
+    
+    drawCandles(){
+        this.candles.forEach(candle => {
+            candle.draw(this.ctx)
+        });
+    }
+
+    private createCandles(agressions: IAgression[]) {
+        this.candles = []
+        let agressions_copy = Array.from(agressions.slice(0, 60))
+        for (const [index, agression] of agressions_copy.entries()) {
+            let last_candle = this.candles[index - 1]
+            let last_price_is_bigger = last_candle?.price > agression.price
+            let candle_color = last_price_is_bigger ? "green" : "red"
+            let price_label = this.y_labels.find(label => label.value == agression.price)
+            this.candles.push(
+                new Candle(
+                    {
+                        x: (last_candle?.x - Candle.margin) || this.CANDLE_AREA_RIGHT - Candle.margin,
+                        y: price_label?.y + this.viewPortY
+                    },
+                    agression.price,
+                    candle_color
+            ))
+        }
+    }
+
+    update(agressions:IAgression[]){
+        this.clear()
+        this.generateRangeY()
+        this.setYLabels()
+        this.getMinMaxY(agressions)
+        this.setXLabels(agressions)
+        this.createCandles(agressions)
+
+        this.drawYLabels()
+        //this.drawXLabels(this.x_labels)
+        this.drawCandles()
+    }
+
+    public drawXLabels(labels:string[]){
         let numbs = 0
         for (const label of labels) {
             this.ctx.font = "12px Roboto"
@@ -54,42 +76,6 @@ export class Renkko extends CanvasElement {
         });
     }
 
-
-    drawCandles(agressions:IAgression[]){
-        this.candles = []
-        let agressions_copy = Array.from(agressions.slice(0,60))
-        for (const [index,agression] of agressions_copy.entries()) {
-            let last_candle = this.candles[index-1]
-            let last_price_is_bigger = last_candle?.price > agression.price
-            let candle_direction = last_price_is_bigger ? 20 : 10
-            let candle_color = last_price_is_bigger? "red" : "green"
-            let price_label = this.y_labels.find(label=>label.value == agression.price)
-            this.candles.push(
-                new Candle(
-                    {
-                        x:(last_candle?.x-Candle.margin) || this.CANDLE_AREA_RIGHT - Candle.margin,y:price_label?.y
-                    },
-                    agression.price,
-                    candle_color
-                ))
-        }
-        this.candles.forEach(candle => {
-            candle.draw(this.ctx)
-        });
-    }
-
-    update(agressions:IAgression[]){
-        this.clear()
-        this.getMinMaxY(agressions)
-        this.generateRangeY()
-        this.setXLabels(agressions)
-        this.setYLabels()
-
-        //this.drawYAxis()
-        //this.drawXLabels(this.x_labels)
-        this.drawCandles(agressions)
-    }
-
     private setXLabels(agressions: IAgression[]) {
         this.x_labels = agressions.map(agression => getFormatedTime(agression.time))
     }
@@ -102,7 +88,14 @@ export class Renkko extends CanvasElement {
         this.y_labels = []
         for (const [index, price] of this.y_range.splice(0, 4).entries()) {
             let last_label = this.y_labels[index - 1]
-            this.y_labels.push(new Label({ x: this.canvas.width - this.RIGHT_OFFSET, y: (last_label?.y + Label.LABEL_MARGIN) || 0 }, price))
+            this.y_labels.push(new Label({ x: this.canvas.width - this.RIGHT_OFFSET, y: ((last_label?.y + Label.LABEL_MARGIN) ) || 0 }, price))
+            
+            // if(last_label) {
+            //     this.centralizeYOnElement(last_label)
+            //     console.log(`price:${last_label.value} | last_label:${last_label?.y} | Margin:${Label.LABEL_MARGIN} | viewport:${this.viewPortY}`)
+            //     console.log(((last_label?.y + Label.LABEL_MARGIN) - this.viewPortY))
+            // }
+                
         }
     }
     /**

@@ -1,3 +1,5 @@
+import type ChartElement from "./ChartElement"
+
 export interface ICoordinates {
     x:number
     y:number
@@ -6,8 +8,8 @@ export interface ICoordinates {
 export default class CanvasElement {
     protected canvas:HTMLCanvasElement 
     protected ctx:CanvasRenderingContext2D
-    translateX:number = 0
-    translateY:number = 0
+    viewPortX:number = 0
+    viewPortY:number = 0
     mouse:ICoordinates
     mouseMoving:boolean = false
 
@@ -17,7 +19,6 @@ export default class CanvasElement {
         this.canvas.height = this.canvas.clientHeight;
         this.ctx =  canvas.getContext("2d");
         
-
         this.canvas.addEventListener('mousemove',(evt=>{
             let timer
             this.mouseMoving = true
@@ -33,6 +34,14 @@ export default class CanvasElement {
           x: evt.clientX - rect.left,
           y: evt.clientY - rect.top
         };
-      }
+    }
+
+    /**
+     * Centralize the viewport Y axis on this element
+     * @param element Chart Element 
+     */
+    public centralizeYOnElement(element:ChartElement){
+           this.viewPortY = element.y - this.canvas.height 
+    }
 
 }
