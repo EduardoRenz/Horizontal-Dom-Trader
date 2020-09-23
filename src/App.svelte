@@ -13,11 +13,14 @@
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
   import { simulate } from "./services/simulation";
   import Popover from "./components/Tools/Popover";
+  import websocket from "./services/websocket";
 
   let main;
   const SCROLL_SENSIBILITY = 20;
 
   onMount(async () => {
+
+
     Popover();
     main.addEventListener("wheel", scrollHorizontal);
     setInterval(() => {
