@@ -20,7 +20,7 @@
 <div class="agressions">
     {#if price_agressions}
         {#each price_agressions.slice(0,MAX_AGRESSIONS_SHOW) as agression(agression)}
-            <div in:receive="{{key: agression}}" out:send="{{key: agression}}"animate:flip="{{duration: 200}}" >
+            <div in:receive="{{key: agression}}" out:send="{{key: agression}}"animate:flip="{{duration: 100}}" >
                 <Agression {agression} />
             </div>
         {/each}
