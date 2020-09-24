@@ -1,44 +1,69 @@
 <script lang="ts">
   import { onMount, afterUpdate } from "svelte";
+  import { simulate } from "./services/simulation";
+  import { getPriceID,roundStep } from "./utils";
+  const SCROLL_SENSIBILITY = 20;
   import {
     time_now,
-    last_agression_time,
     offers,
     last_price,
     follow_last_price,
+    min,
+    max,
+    price_markers,
   } from "./store";
-  import { getPriceID } from "./utils";
   import Head from "./components/Head/Head.svelte";
   import Footer from "./components/Footer.svelte";
   import PriceArea from "./components/PriceArea/PriceArea.svelte";
-  import { simulate } from "./services/simulation";
   import Popover from "./components/Tools/Popover";
-  import websocket from "./services/websocket";
-
+  import { getMarketStream } from "./services/websocket";
+  import { getMarketData } from "./services/marketDataRest";
   let main;
-  const SCROLL_SENSIBILITY = 20;
+  $: $last_price, $follow_last_price && followPrice();
+  $: $min || $max, (price_range = generateMinMaxRange());
+  let price_range: number[];
+
+  async function getPriceMarkers() {
+    const market_data = await getMarketData("dolv20");
+    price_markers.set({
+      [roundStep(market_data.adjustmentPreviousDay,0.5)]: { name: "Ajuste Anterior",color: 'rgba(50, 41, 179, 0.5)' },
+      [roundStep(market_data.open,0.5)]: { name: "Abertura",color: '#b3b3b3'  },
+      [roundStep(market_data.previous,0.5)]: { name: "Fechamento Ant.",color: '#b3b3b3'  },
+    });
+  }
+
+  function getMarkers(price) {
+    if ($price_markers[String(price)]) {
+      return [$price_markers[String(price)]];
+    }
+  }
+
+  function generateMinMaxRange() {
+    let range = [];
+    for (let index = $min; index < $max; index += 0.5) {
+      range.push(index);
+    }
+    return range;
+  }
 
   onMount(async () => {
-
-
+    getMarketStream("dolv20");
+    await getPriceMarkers();
     Popover();
     main.addEventListener("wheel", scrollHorizontal);
     setInterval(() => {
       time_now.set(new Date());
       //Simulations
-      simulate($last_price, $offers);
+      //simulate($last_price, $offers);
     }, 1000);
   });
 
-  $: $last_price, $follow_last_price && followPrice();
-
-  //  afterUpdate(()=>{
-  //    if($follow_last_price)
-  //     followPrice()
-  //  })
-
   function followPrice() {
-    document.querySelector(`#${getPriceID($last_price)}`).scrollIntoView({
+    let element = document.querySelector(`#${getPriceID($last_price)}`);
+    if (!element) {
+      return;
+    }
+    element.scrollIntoView({
       behavior: "smooth",
       inline: "center",
       block: "center",
@@ -70,8 +95,13 @@
 
 <Head />
 <main bind:this={main}>
-  <PriceArea price={5380.5} isLimit={true} />
-  <PriceArea
+  {#each price_range as price, i}
+    <PriceArea
+      {price}
+      isLimit={i == 0 || i == price_range.length - 1}
+      markers={getMarkers(price)} />
+  {/each}
+  <!-- <PriceArea
     price={5381.0}
     markers={[{ name: 'Ajuste Ant.', color: 'rgba(168, 168, 168, 0.5)' }, { name: 'VWAP', color: 'rgba(0, 209, 255, 0.5)' }]} />
   <PriceArea price={5381.5} />
@@ -93,6 +123,6 @@
   <PriceArea
     price={5388.5}
     markers={[{ name: 'Ajuste Ant.', color: 'rgba(50, 41, 179, 0.5)' }]} />
-  <PriceArea price={5389.0} isLimit={true} />
+  <PriceArea price={5389.0} isLimit={true} /> -->
 </main>
 <Footer />
