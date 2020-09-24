@@ -21,7 +21,7 @@
 	--light-gray:rgba(255, 255, 255, 0.46);
 	--light-text:rgba(255, 255, 255, 0.7);
 
-	--player-institucional-br:#FF8A00;
+	--player-market-maker:#FF8A00;
 	--player-estrangeiro:#122EB3;
 	--player-hft:#474747;
 
@@ -136,8 +136,8 @@ option {
 	text-align: center;
 }
 
-.player-institucional-br {
-	background-color: var(--player-institucional-br);
+.player-market-maker {
+	background-color: var(--player-market-maker);
 }
 .player-estrangeiro {
 	background-color: var(--player-estrangeiro);
