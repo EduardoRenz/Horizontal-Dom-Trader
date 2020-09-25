@@ -6,7 +6,7 @@
   import controllerStop from "@iconify/icons-entypo/controller-stop";
   import controllerPaus from "@iconify/icons-entypo/controller-paus";
   import bxsDownload from "@iconify/icons-bx/bxs-download";
-  import{ agressions, simulation } from '../../store'
+  import{ simulation } from '../../store'
 
   let file
   $:progress = 0
@@ -18,16 +18,13 @@
       reader.onloadstart = ()=>{
         simulation.update((last)=>{return {...last,status:'loading'}})
       }
-
       reader.onprogress = (data)=>{
         if (data.lengthComputable) {                                            
                 progress = parseInt( ((data.loaded / data.total) * 100), 10 );
-                console.log(progress);
             }
       }
-
       reader.onloadend = ()=>{
-          let decoded = atob(reader.result.split('base64,')[1])
+          let decoded = JSON.parse(atob(reader.result.split('base64,')[1]))
           simulation.update((last)=>{return {...last,agressions:decoded,status:'paused'}})
           progress = 0
       }

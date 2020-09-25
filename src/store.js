@@ -1,9 +1,8 @@
 import { writable,derived } from 'svelte/store';
 import cors from "../public/assets/corretoras.json"
+export const corretoras = cors
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
-export const corretoras = cors
-// Configuration
 export let follow_last_price = writable(false) // Use in Magnet button, for following the last price
 export let agressions_limit_show = writable(100) // max number of agressions to stay on screen
 export let color_config = writable({
@@ -17,6 +16,7 @@ export let color_config = writable({
 })
 // Config of simulation component, with the simulation file
 export let simulation = writable({
+    is_simulation_envionment:false,
     status:null,
     speed:1,
     current_step:null,
