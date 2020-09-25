@@ -6,17 +6,30 @@
   import controllerStop from "@iconify/icons-entypo/controller-stop";
   import controllerPaus from "@iconify/icons-entypo/controller-paus";
   import bxsDownload from "@iconify/icons-bx/bxs-download";
+  import{ agressions, simulation } from '../../store'
 
   let file
-  let is_playing = false;
+  $:progress = 0
+
 
   function handleFile(){
       const reader = new FileReader();
       reader.readAsDataURL(file.files[0]);
+      reader.onloadstart = ()=>{
+        simulation.update((last)=>{return {...last,status:'loading'}})
+      }
+
+      reader.onprogress = (data)=>{
+        if (data.lengthComputable) {                                            
+                progress = parseInt( ((data.loaded / data.total) * 100), 10 );
+                console.log(progress);
+            }
+      }
+
       reader.onloadend = ()=>{
-          console.log(reader.result)
-          let decodes = atob(reader.result.split('base64,')[1])
-       console.log (decodes);
+          let decoded = atob(reader.result.split('base64,')[1])
+          simulation.update((last)=>{return {...last,agressions:decoded,status:'paused'}})
+          progress = 0
       }
   }
 
@@ -70,6 +83,9 @@
   label {
       cursor: pointer;
   }
+  .disabled {
+      display: none;
+  }
 </style>
 
 <section>
@@ -84,7 +100,7 @@
           color="var(--light-gray)" />
       </label>
     </div>
-    <div class="play-bar-buttons">
+    <div class="play-bar-buttons" class:disabled={!$simulation.status || !$simulation.status == 'loading'}>
       <button>
         <Icon
           icon={controllerFastBackward}
@@ -99,9 +115,9 @@
           width="26px"
           color="var(--light-gray)" />
       </button>
-      <button on:click={() => (is_playing = !is_playing)}>
+      <button on:click={() => ($simulation.status = $simulation.status == 'paused' ? 'playing' : 'paused')}>
         <Icon
-          icon={is_playing ? controllerPaus : controllerPlay}
+          icon={$simulation.status == 'playing' ? controllerPaus : controllerPlay}
           height="24px"
           width="26px"
           color="var(--light-gray)" />
@@ -117,6 +133,6 @@
 
   </menu>
   <div class="progress-bar">
-    <div class="progress" style={`width:50%`} />
+    <div class="progress" style={`width:${progress}`} />
   </div>
 </section>

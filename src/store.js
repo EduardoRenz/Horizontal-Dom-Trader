@@ -15,6 +15,13 @@ export let color_config = writable({
         {min:301,max:9999,color:'#BD1502',text_color:"#ffffff"},
     ]
 })
+// Config of simulation component, with the simulation file
+export let simulation = writable({
+    status:null,
+    speed:1,
+    current_step:null,
+    agressions:[]
+})
 
 // Day Info
 export let last_price = writable(5384.5); // Last Price agression
