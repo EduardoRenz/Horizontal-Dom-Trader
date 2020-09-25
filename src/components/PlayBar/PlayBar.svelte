@@ -4,28 +4,43 @@
   import controllerFastForward from "@iconify/icons-entypo/controller-fast-forward";
   import controllerPlay from "@iconify/icons-entypo/controller-play";
   import controllerStop from "@iconify/icons-entypo/controller-stop";
-  import bxsDownload from '@iconify/icons-bx/bxs-download';
+  import controllerPaus from "@iconify/icons-entypo/controller-paus";
+  import bxsDownload from "@iconify/icons-bx/bxs-download";
+
+  let file
+  let is_playing = false;
+
+  function handleFile(){
+      const reader = new FileReader();
+      reader.readAsDataURL(file.files[0]);
+      reader.onloadend = ()=>{
+          console.log(reader.result)
+          let decodes = atob(reader.result.split('base64,')[1])
+       console.log (decodes);
+      }
+  }
+
 </script>
 
 <style>
-  button {
+  button,label {
     transition: opacity var(--transition-speed) ease;
     opacity: 0.8;
     height: 28px;
   }
-  button:hover {
+  button:hover ,label:hover{
     opacity: 1;
   }
   .buttons {
     display: flex;
     padding: 0 var(--padding);
   }
-  .options-buttons  {
+  .options-buttons {
     display: flex;
     justify-content: start;
   }
-  
-  .play-bar-buttons{
+
+  .play-bar-buttons {
     display: flex;
     justify-content: center;
     gap: 5px;
@@ -39,24 +54,35 @@
     background: var(--light-gray);
     border-radius: var(--border-radius);
   }
-  .progress{
-      position: relative;
-      height: 100%;
-      background: var(--primary);
-      border-radius: var(--border-radius);
+  .progress {
+    position: relative;
+    height: 100%;
+    background: var(--primary);
+    border-radius: var(--border-radius);
+  }
+
+  input {
+    width: 0.1px;
+	height: 0.1px;
+    position: absolute;
+      /* opacity: 0; */
+  }
+  label {
+      cursor: pointer;
   }
 </style>
 
 <section>
   <menu class="buttons">
     <div class="options-buttons">
-      <button>
+      <label data-title="Fazer upload de arquivo de simulação"  for="file_upload">
+          <input type="file" id="file_upload" bind:this={file} on:change={()=>handleFile()}>
         <Icon
           icon={bxsDownload}
           height="24px"
           width="26px"
           color="var(--light-gray)" />
-      </button>
+      </label>
     </div>
     <div class="play-bar-buttons">
       <button>
@@ -73,9 +99,9 @@
           width="26px"
           color="var(--light-gray)" />
       </button>
-      <button>
+      <button on:click={() => (is_playing = !is_playing)}>
         <Icon
-          icon={controllerPlay}
+          icon={is_playing ? controllerPaus : controllerPlay}
           height="24px"
           width="26px"
           color="var(--light-gray)" />
@@ -91,6 +117,6 @@
 
   </menu>
   <div class="progress-bar">
-    <div class="progress" style={`width:50%`}  />
+    <div class="progress" style={`width:50%`} />
   </div>
 </section>
