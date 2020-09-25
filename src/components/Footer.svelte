@@ -3,7 +3,7 @@
     import Renkko from "./Charts/Renkko.svelte"
 </script>
 <footer>
-    <Renkko />
+    <!-- <Renkko /> -->
     <Ranking selected={"c_5"} />
     <Ranking selected={"v_5"}/>
 </footer>

@@ -1,11 +1,13 @@
 <script>
     import Clock from '../Clock/Clock.svelte'
     import Toolbar from '../Head/Toolbar.svelte'
+    import PlayBar from '../PlayBar/PlayBar.svelte'
 </script>
 <header>
     <h2 >Trader - DOLW20</h2>
     <div class="right">
         <Toolbar/> 
+        <PlayBar/>
         <Clock/>
     </div>
 

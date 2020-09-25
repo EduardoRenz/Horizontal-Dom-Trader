@@ -1,10 +1,11 @@
 import { writable,derived } from 'svelte/store';
 import corretoras_json from "../public/assets/corretoras.json"
 import { getMarketData } from './services/marketDataRest.js'
+export const corretoras = corretoras_json
+
+
 //Configs
 export let absortion_factor = 10 // Percent for consider an absortion related to counter agression
-export const corretoras = corretoras_json
-// Configuration
 export let follow_last_price = writable(false) // Use in Magnet button, for following the last price
 export let agressions_limit_show = writable(100) // max number of agressions to stay on screen
 export let color_config = writable({
@@ -15,6 +16,14 @@ export let color_config = writable({
         {min:201,max:300,color:'#e38520',text_color:"#ffffff"},
         {min:301,max:9999,color:'#BD1502',text_color:"#ffffff"},
     ]
+})
+// Config of simulation component, with the simulation file
+export let simulation = writable({
+    is_simulation_envionment:false,
+    status:null,
+    speed:1,
+    current_step:null,
+    agressions:[]
 })
 
 // Day Info

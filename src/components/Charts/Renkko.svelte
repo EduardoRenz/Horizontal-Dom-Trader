@@ -32,6 +32,13 @@
       "times times";
     grid-template-rows: 1fr 15px;
     grid-template-columns: 1fr 40px;
+    overflow-y: scroll;
+  }
+  .time-wrapper{
+    grid-area: times;
+    position: absolute;
+    bottom: 10px;
+    width: inherit;
   }
 </style>
 <canvas class="renkko" id="renkko" height="700px" />
