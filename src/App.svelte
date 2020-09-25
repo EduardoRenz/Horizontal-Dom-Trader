@@ -47,10 +47,11 @@
   }
 
   onMount(async () => {
+    main.addEventListener("wheel", scrollHorizontal);
+    Popover();
     getMarketStream("dolv20");
     await getPriceMarkers();
-    Popover();
-    main.addEventListener("wheel", scrollHorizontal);
+
     setInterval(() => {
       time_now.set(new Date());
       //Simulations
