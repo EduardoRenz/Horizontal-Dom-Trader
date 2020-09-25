@@ -10,8 +10,10 @@
   "devDependencies": {
     "@iconify/icons-ant-design": "^1.0.8",
     "@iconify/icons-bi": "^1.0.6",
+    "@iconify/icons-bx": "^1.0.3",
     "@iconify/icons-cryptocurrency": "^1.0.10",
     "@iconify/icons-el": "^1.0.5",
+    "@iconify/icons-entypo": "^1.0.5",
     "@iconify/icons-eva": "^1.0.0",
     "@iconify/icons-fa": "^1.0.3",
     "@iconify/icons-ic": "^1.0.16",
