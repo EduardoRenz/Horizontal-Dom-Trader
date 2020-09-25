@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
-  import { simulate } from "./services/simulation";
+  import { onMount } from "svelte";
   import { getPriceID,roundStep } from "./utils";
   const SCROLL_SENSIBILITY = 20;
   import {
@@ -18,7 +17,7 @@
   import Popover from "./components/Tools/Popover";
   import { getMarketStream } from "./services/websocket";
   import { getMarketData } from "./services/marketDataRest";
-  let main;
+  let main:HTMLElement;
   $: $last_price, $follow_last_price && followPrice();
   $: $min || $max, (price_range = generateMinMaxRange());
   let price_range: number[];
@@ -54,8 +53,6 @@
 
     setInterval(() => {
       time_now.set(new Date());
-      //Simulations
-      //simulate($last_price, $offers);
     }, 1000);
   });
 

@@ -6,39 +6,48 @@
   import controllerStop from "@iconify/icons-entypo/controller-stop";
   import controllerPaus from "@iconify/icons-entypo/controller-paus";
   import bxsDownload from "@iconify/icons-bx/bxs-download";
-  import{ simulation } from '../../store'
+  import { simulation } from "../../store";
 
-  let file
-  $:progress = 0
+  let file;
+  $: progress = 0;
 
-
-  function handleFile(){
-      const reader = new FileReader();
-      reader.readAsDataURL(file.files[0]);
-      reader.onloadstart = ()=>{
-        simulation.update((last)=>{return {...last,status:'loading'}})
+  function handleFile() {
+    const reader = new FileReader();
+    reader.readAsDataURL(file.files[0]);
+    reader.onloadstart = () => {
+      simulation.update((last) => {
+        return { ...last, status: "loading" };
+      });
+    };
+    reader.onprogress = (data) => {
+      if (data.lengthComputable) {
+        progress = parseInt((data.loaded / data.total) * 100, 10);
       }
-      reader.onprogress = (data)=>{
-        if (data.lengthComputable) {                                            
-                progress = parseInt( ((data.loaded / data.total) * 100), 10 );
-            }
-      }
-      reader.onloadend = ()=>{
-          let decoded = JSON.parse(atob(reader.result.split('base64,')[1]))
-          simulation.update((last)=>{return {...last,agressions:decoded,status:'paused'}})
-          progress = 0
-      }
+    };
+    reader.onloadend = () => {
+      let decoded = JSON.parse(atob(reader.result.split("base64,")[1]));
+      simulation.update((last) => {
+        return {
+          ...last,
+          agressions: decoded.agressions,
+          quotes:decoded.quotes,
+          status: "paused",
+        };
+      });
+      progress = 0;
+    };
   }
-
 </script>
 
 <style>
-  button,label {
+  button,
+  label {
     transition: opacity var(--transition-speed) ease;
     opacity: 0.8;
     height: 28px;
   }
-  button:hover ,label:hover{
+  button:hover,
+  label:hover {
     opacity: 1;
   }
   .buttons {
@@ -73,23 +82,29 @@
 
   input {
     width: 0.1px;
-	height: 0.1px;
+    height: 0.1px;
     position: absolute;
-      /* opacity: 0; */
+    /* opacity: 0; */
   }
   label {
-      cursor: pointer;
+    cursor: pointer;
   }
   .disabled {
-      display: none;
+    display: none;
   }
 </style>
 
 <section>
   <menu class="buttons">
     <div class="options-buttons">
-      <label data-title="Fazer upload de arquivo de simulação"  for="file_upload">
-          <input type="file" id="file_upload" bind:this={file} on:change={()=>handleFile()}>
+      <label
+        data-title="Fazer upload de arquivo de simulação"
+        for="file_upload">
+        <input
+          type="file"
+          id="file_upload"
+          bind:this={file}
+          on:change={() => handleFile()} />
         <Icon
           icon={bxsDownload}
           height="24px"
@@ -97,7 +112,9 @@
           color="var(--light-gray)" />
       </label>
     </div>
-    <div class="play-bar-buttons" class:disabled={!$simulation.status || !$simulation.status == 'loading'}>
+    <div
+      class="play-bar-buttons"
+      class:disabled={!$simulation.status || !$simulation.status == 'loading'}>
       <button>
         <Icon
           icon={controllerFastBackward}
@@ -112,7 +129,8 @@
           width="26px"
           color="var(--light-gray)" />
       </button>
-      <button on:click={() => ($simulation.status = $simulation.status == 'paused' ? 'playing' : 'paused')}>
+      <button
+        on:click={() => ($simulation.status = $simulation.status == 'paused' ? 'playing' : 'paused')}>
         <Icon
           icon={$simulation.status == 'playing' ? controllerPaus : controllerPlay}
           height="24px"
