@@ -2,10 +2,8 @@
   import { onMount,afterUpdate } from "svelte";
   import { Renkko } from "./Renkko.ts";
   import { agressions,last_price } from "../../store";
-  const TIMES_TO_SHOW = 5;
-  const PRICES_TO_SHOW = 4;
-  let canvas, ctx;
-  let renkko
+
+  let canvas,renkko
   onMount(() => {
     canvas = document.querySelector('#renkko')
     renkko = new Renkko(canvas)
@@ -34,12 +32,7 @@
     grid-template-columns: 1fr 40px;
     overflow-y: scroll;
   }
-  .time-wrapper{
-    grid-area: times;
-    position: absolute;
-    bottom: 10px;
-    width: inherit;
-  }
+
 </style>
 <canvas class="renkko" id="renkko" height="700px" />
 
