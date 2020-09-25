@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import {
     time_now,
-    last_agression_time,
     offers,
     last_price,
     follow_last_price,
