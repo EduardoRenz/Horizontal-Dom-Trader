@@ -46,9 +46,4 @@ export function simulate($last_price,$offers) {
 
         return new_offers
     })
-
-
-
 }
-
-

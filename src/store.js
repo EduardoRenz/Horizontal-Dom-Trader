@@ -1,6 +1,5 @@
 import { writable,derived } from 'svelte/store';
 import corretoras_json from "../public/assets/corretoras.json"
-import { getMarketData } from './services/marketDataRest.js'
 export const corretoras = corretoras_json
 
 
