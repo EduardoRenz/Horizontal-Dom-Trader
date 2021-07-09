@@ -3,7 +3,7 @@
 
 A platform for Day Trade based on order flow made with Svelte.
 
-This project is based on "Tape Reading" techniques using a new type of grphical interface.
+This project is based on "Tape Reading" techniques using a new type of UI and diffrent concept of charts.
 
 ![Preview](public/preview.png)
 
