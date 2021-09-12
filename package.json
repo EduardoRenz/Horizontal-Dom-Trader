@@ -5,7 +5,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "cypress": "./node_modules/.bin/cypress open"
   },
   "devDependencies": {
     "@iconify/icons-ant-design": "^1.0.8",
