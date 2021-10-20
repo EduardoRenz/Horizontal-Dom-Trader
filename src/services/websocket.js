@@ -2,7 +2,7 @@ import { min,max,last_price,agressions,offers,price_markers} from '../store'
 import { groupBy } from '../utils'
 var wsUri = "ws://webfeeder.cedrotech.com/ws";
 let websocket
-let token = "1f50c44b-8cf5-44b6-bfa1-3058e9dfa858"
+let token = //TODO: GET TOKEN FROM ENV
 
 export function getMarketStream(ativo){
     websocket= new WebSocket(wsUri);
