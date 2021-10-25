@@ -1,8 +1,8 @@
 <!-- Represents the whole price column -->
 <script type="ts">
     import { derived } from 'svelte/store'
-    import { offers,agressions,last_price,last_agression_time,agressions_limit_show } from '../../store.js'
-    import { getFormatedTime,dateIsLowerThan , getPriceID} from '../../utils'
+    import { offers,agressions,last_price,last_agression_time,agressions_limit_show,time_now } from '../../store.js'
+    import { getFormatedTime,dateIsLowerThan, minutesAndSecondsDiff , getPriceID} from '../../utils'
     import Note from './Note.svelte'
     import PriceMarker from './PriceMarker.svelte'
     import PriceLine from './PriceLine.svelte'
@@ -23,6 +23,11 @@
 
     let last_agression = derived(price_agressions, ()=> $price_agressions?.map(agression => agression.time)
                         .reduce((agg,acc)=>{ return dateIsLowerThan(acc,agg) ? agg : acc},price_agressions[0]?.time) || price_agressions[0]?.time)
+
+
+
+
+
 
 </script>
 
@@ -119,7 +124,8 @@
       {$price_total}
     </span>
     <small class="price-last-agression" class:last-agression={$last_agression_time === $last_agression }>
-     { last_agression && getFormatedTime($last_agression) ||''}
+     { $last_agression && minutesAndSecondsDiff($last_agression,$time_now) ||''}
+     <!-- { last_agression && getFormatedTime($last_agression) ||''} -->
     </small>
     <Agressions price_agressions={$price_agressions}/>
     <VAP agressions={$price_agressions} />
