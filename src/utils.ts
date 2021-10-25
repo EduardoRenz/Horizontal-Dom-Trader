@@ -26,6 +26,8 @@ export const dateIsLowerThan = (main_date: Date, date_to_compare: Date) => main_
 // get difference in mm:ss between two dates
 export function minutesAndSecondsDiff(date1, date2) {
   let diff = date2.getTime() - date1.getTime()
+  if (diff > 0) return "00:00"
+
   let minutes = Math.floor(diff / (1000 * 60))
   let seconds = Math.floor(diff / 1000) - minutes * 60
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
