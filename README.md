@@ -7,6 +7,8 @@ This project is based on "Tape Reading" techniques using a new type of UI and di
 
 ![Preview](public/preview.png)
 
+Prototype link [Here!](https://www.figma.com/proto/GDvs8uJr1vPjG9b1tjd3HO/Trader?page-id=0%3A1&node-id=1%3A2&viewport=315%2C48%2C0.66&scaling=min-zoom&starting-point-node-id=1%3A2)
+
 ---
 
 
